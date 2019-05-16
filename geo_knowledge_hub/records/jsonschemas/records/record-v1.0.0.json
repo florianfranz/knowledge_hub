@@ -1,92 +1,279 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "http://localhost/schemas/records/record-v1.0.0.json",
-  "additionalProperties": false,
   "title": "GEO Knowledge Hub v1.0.0",
+  "definitions": {
+    "contributor_person_or_org": {
+      "additionalProperties": false,
+      "properties": {
+        "affiliation": {
+          "description": "Affiliation for the purpose of this specific record.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Full name of person or organisation. Personal name format: family, given.",
+          "type": "string"
+        },
+        "orcid": {
+          "description": "ORCID identifier for creator.",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "ContactPerson",
+            "DataCollector",
+            "DataCurator",
+            "DataManager",
+            "Distributor",
+            "Editor",
+            "HostingInstitution",
+            "Other",
+            "Producer",
+            "ProjectLeader",
+            "ProjectManager",
+            "ProjectMember",
+            "RegistrationAgency",
+            "RegistrationAuthority",
+            "RelatedPerson",
+            "Researcher",
+            "ResearchGroup",
+            "RightsHolder",
+            "Sponsor",
+            "Supervisor",
+            "WorkPackageLeader"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object"
+    },
+    "relation": {
+      "description": "Relation type.",
+      "enum": [
+        "isCitedBy",
+        "cites",
+        "isSupplementTo",
+        "isSupplementedBy",
+        "isContinuedBy",
+        "continues",
+        "hasMetadata",
+        "isMetadataFor",
+        "isNewVersionOf",
+        "isPreviousVersionOf",
+        "isPartOf",
+        "hasPart",
+        "isReferencedBy",
+        "references",
+        "isDocumentedBy",
+        "documents",
+        "isCompiledBy",
+        "compiles",
+        "isVariantFormOf",
+        "isOrignialFormOf",
+        "isIdenticalTo",
+        "isReviewedBy",
+        "reviews",
+        "isDerivedFrom",
+        "isSourceOf"
+      ],
+      "type": "string"
+    },
+    "scheme": {
+      "description": "Persistent identifier scheme.",
+      "enum": [
+        "ads",
+        "ark",
+        "arxiv",
+        "bioproject",
+        "biosample",
+        "doi",
+        "ean13",
+        "ean8",
+        "ensembl",
+        "genome",
+        "gnd",
+        "hal",
+        "handle",
+        "isbn",
+        "isni",
+        "issn",
+        "istc",
+        "lsid",
+        "orcid",
+        "pmcid",
+        "pmid",
+        "purl",
+        "refseq",
+        "sra",
+        "uniprot",
+        "url",
+        "urn"
+      ],
+      "type": "string"
+    }
+  },
   "type": "object",
   "properties": {
+    "recid": {
+      "description": "Invenio record identifier (integer).",
+      "type": "number"
+    },
+    "doi": {
+      "description": "Digital Object Identifier (DOI).",
+      "type": "string"
+    },
+    "resource_type": {
+      "description": "Resource type.",
+      "enum": [
+        "DocumentSet",
+        "Publication",
+        "Dataset",
+        "Software",
+        "Video",
+        "Image",
+        "Presentation"
+      ],
+      "type": "string"
+    },
+    "publication_type": {
+      "additionalProperties": false,
+      "description": "Publication type.",
+      "default": "article",
+      "type": {
+        "enum": [
+          "book",
+          "section",
+          "conferencepaper",
+          "article",
+          "patent",
+          "preprint",
+          "report",
+          "deliverable",
+          "milestone",
+          "proposal",
+          "softwaredocumentation",
+          "thesis",
+          "technicalnote",
+          "workingpaper",
+          "datamanagementplan",
+          "annotationcollection",
+          "other"
+        ],
+        "type": "string"
+      }
+    },
+    "dataset_type": {
+      "additionalProperties": false,
+      "description": "Dataset type.",
+      "default": "remotesensing",
+      "type": {
+        "enum": [
+          "multitype",
+          "remotesensing",
+          "insitu",
+          "ancillary",
+          "other"
+        ],
+        "type": "string"
+      }
+    },
+    "image_type": {
+      "additionalProperties": false,
+      "default": "figure",
+      "description": "Image type.",
+      "type": {
+        "enum": [
+          "figure",
+          "plot",
+          "drawing",
+          "diagram",
+          "photo",
+          "other"
+        ],
+        "type": "string"
+      }
+    },
     "title": {
       "description": "Record title.",
       "type": "string"
     },
-    "id": {
-      "description": "Invenio record identifier (integer).",
-      "type": "number"
+    "description": {
+      "description": "Description/abstract for record.",
+      "type": "string"
     },
     "keywords": {
       "description": "Free text keywords.",
       "items": {
+        "title": "Keyword",
         "type": "string"
       },
+      "title": "Keywords",
       "type": "array"
     },
-    "publication_date": {
-      "description": "When the record is published",
-      "type": "string",
-      "format": "date-time"
+    "license": {
+      "description": "License for the content.",
+      "title": "License",
+      "type": "object"
     },
-    "contributors": {
-      "description": "Contributors in order of importance.",
-      "minItems": 1,
-      "type": "array",
+    "publication_date": {
+      "description": "Record publication date (IS8601-formatted). EDTF support to be added for field.",
+      "type": "string"
+    },
+    "alternate_identifiers": {
+      "description": "Alternate identifiers for record.",
       "items": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
-          "ids": {
-            "description": "List of IDs related with the person.",
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-              "additionalProperties": false,
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "name": {
-            "description": "Full name of person or organisation. Personal name format: family, given.",
+          "identifier": {
+            "description": "Identifier of research output.",
             "type": "string"
           },
-          "affiliations": {
-            "description": "Affiliation(s) for the purpose of this specific record.",
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "email": {
-            "type": "string",
-            "description": "Contact email for the purpose of this specific record.",
-            "format": "email"
-          },
-          "role": {
-            "description": "",
-            "type": "string",
-            "enum": [
-              "ContactPerson",
-              "Researcher",
-              "Other"
-            ]
+          "scheme": {
+            "$ref": "#/definitions/scheme"
           }
         },
         "required": [
-          "name"
-        ]
-
-      }
+          "identifier",
+          "scheme"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "related_identifiers": {
+      "description": "Related research outputs.",
+      "items": {
+        "properties": {
+          "scheme": {
+            "$ref": "#/definitions/scheme"
+          },
+          "identifier": {
+            "description": "Identifier of research output.",
+            "type": "string"
+          },
+          "relation": {
+            "$ref": "#/definitions/relation"
+          }
+        },
+        "required": [
+          "identifier",
+          "relation",
+          "scheme"
+        ],
+        "type": "object"
+      },
+      "type": "array"
     }
   },
+  "additionalProperties": false,
   "required": [
-    "id",
-    "contributors",
-    "title"
+    "recid",
+    "resource_type",
+    "title",
+    "publication_date"
   ]
 }
