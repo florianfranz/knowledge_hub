@@ -8,6 +8,12 @@
           "type": "text",
           "index": false
         },
+        "recid": {
+          "type": "integer"
+        },
+        "resource_type": {
+          "type": "text"
+        },
         "title": {
           "type": "text",
           "copy_to": "suggest_title"
@@ -22,8 +28,7 @@
           "type": "keyword"
         },
         "publication_date": {
-          "type": "date",
-          "format": "date"
+          "type": "text"
         },
         "contributors": {
           "type": "object",
