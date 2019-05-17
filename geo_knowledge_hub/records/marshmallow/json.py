@@ -38,9 +38,10 @@ class MetadataSchemaV1(StrictKeysMixin):
     id = PersistentIdentifier()
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     keywords = fields.List(SanitizedUnicode(), many=True)
-    publication_date = DateString()
-    contributors = Nested(ContributorSchemaV1, many=True, required=True)
-
+    publication_date = SanitizedUnicode()
+    contributors = Nested(ContributorSchemaV1, many=True)
+    recid = fields.Integer()
+    resource_type = SanitizedUnicode(required=True, validate=validate.Length(min=3))
 
 class RecordSchemaV1(StrictKeysMixin):
     """Record schema."""
