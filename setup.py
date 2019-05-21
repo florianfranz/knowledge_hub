@@ -45,6 +45,7 @@ setup(
         'invenio_base.blueprints': [
             'geo_knowledge_hub = geo_knowledge_hub.theme.views:blueprint',
             'geo_knowledge_hub_records = geo_knowledge_hub.records.views:blueprint',
+            'geo_knowledge_hub_deposit = geo_knowledge_hub.deposit.views:blueprint',
         ],
         'invenio_assets.webpack': [
             'geo_knowledge_hub_theme = geo_knowledge_hub.theme.webpack:theme',
