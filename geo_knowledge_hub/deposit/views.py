@@ -26,9 +26,6 @@ def create():
     form = RecordForm()
     # if the form is submitted and valid
     if form.validate_on_submit():
-        # we creare one contributor object with the submitted name
-        resourcetype = [dict(name=form.resource_type.data)]
-        publidate = [dict(name=form.publication_date.data)]
         # set the owner as the current logged in user
         owner = int(current_user.get_id())
         # create the record
