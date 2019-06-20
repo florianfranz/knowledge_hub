@@ -118,25 +118,29 @@
   },
   "type": "object",
   "properties": {
-    "recid": {
-      "description": "Invenio record identifier (integer).",
-      "type": "number"
-    },
-    "doi": {
-      "description": "Digital Object Identifier (DOI).",
+    "docset_doi": {
+      "description": "DOI of the whole document set.",
       "type": "string"
     },
-    "resource_type": {
-      "description": "Resource type.",
-      "enum": [
-        "DocumentSet",
-        "Publication",
-        "Dataset",
-        "Software",
-        "Video",
-        "Image",
-        "Presentation"
-      ],
+    "docset_title": {
+      "description": "Full title of the whole document set.",
+      "type": "string"
+    },
+    "docset_abstract": {
+      "description": "Description or abstract of the whole document set.",
+      "type": "string"
+    },
+    "docset_keywords": {
+      "description": "Free text keywords of the document set.",
+      "items": {
+        "title": "Keyword",
+        "type": "string"
+      },
+      "title": "Document Set Keywords",
+      "type": "array"
+    },
+    "docset_notes": {
+      "description": "Additional notes",
       "type": "string"
     },
     "publication_type": {
@@ -166,107 +170,30 @@
         "type": "string"
       }
     },
-    "dataset_type": {
-      "additionalProperties": false,
-      "description": "Dataset type.",
-      "default": "remotesensing",
-      "type": {
-        "enum": [
-          "multitype",
-          "remotesensing",
-          "insitu",
-          "ancillary",
-          "other"
-        ],
-        "type": "string"
-      }
-    },
-    "image_type": {
-      "additionalProperties": false,
-      "default": "figure",
-      "description": "Image type.",
-      "type": {
-        "enum": [
-          "figure",
-          "plot",
-          "drawing",
-          "diagram",
-          "photo",
-          "other"
-        ],
-        "type": "string"
-      }
-    },
-    "title": {
-      "description": "Record title.",
+    "publication_doi": {
+      "description": "DOI of the publication",
       "type": "string"
     },
-    "description": {
-      "description": "Description/abstract for record.",
+    "publication_title": {
+      "description": "Title of the publication",
       "type": "string"
-    },
-    "keywords": {
-      "description": "Free text keywords.",
-      "items": {
-        "title": "Keyword",
-        "type": "string"
-      },
-      "title": "Keywords",
-      "type": "array"
-    },
-    "license": {
-      "description": "License for the content.",
-      "title": "License",
-      "type": "object"
     },
     "publication_date": {
       "description": "Record publication date (IS8601-formatted). EDTF support to be added for field.",
       "type": "string"
     },
-    "alternate_identifiers": {
-      "description": "Alternate identifiers for record.",
+    "publication_authors": {
+      "description": "Author(s) of the publication",
       "items": {
-        "additionalProperties": false,
-        "properties": {
-          "identifier": {
-            "description": "Identifier of research output.",
-            "type": "string"
-          },
-          "scheme": {
-            "$ref": "#/definitions/scheme"
-          }
-        },
-        "required": [
-          "identifier",
-          "scheme"
-        ],
-        "type": "object"
+        "title": "Author",
+        "type": "string"
       },
+      "title": "Authors",
       "type": "array"
     },
-    "related_identifiers": {
-      "description": "Related research outputs.",
-      "items": {
-        "properties": {
-          "scheme": {
-            "$ref": "#/definitions/scheme"
-          },
-          "identifier": {
-            "description": "Identifier of research output.",
-            "type": "string"
-          },
-          "relation": {
-            "$ref": "#/definitions/relation"
-          }
-        },
-        "required": [
-          "identifier",
-          "relation",
-          "scheme"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+    "publication_abstract": {
+      "description": "Abstract of the publication",
+      "type": "string"
     }
   },
   "additionalProperties": false,

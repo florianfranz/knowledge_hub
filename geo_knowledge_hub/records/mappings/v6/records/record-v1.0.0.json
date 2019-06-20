@@ -8,26 +8,37 @@
           "type": "text",
           "index": false
         },
-        "recid": {
-          "type": "integer"
+        "docset_doi": {
+          "type": "keyword"
         },
-        "resource_type": {
+        "docset_title": {
           "type": "text"
         },
-        "title": {
-          "type": "text",
-          "copy_to": "suggest_title"
+        "docset_abstract": {
+          "type": "text"
         },
-        "suggest_title": {
-          "type": "completion"
-        },
-        "id": {
+        "docset_keywords": {
           "type": "keyword"
         },
-        "keywords": {
+        "docset_notes": {
+          "tpye": "text"
+        },
+        "publication_type": {
           "type": "keyword"
+        },
+        "publication_doi": {
+          "type": "keyword"
+        },
+        "publication_title": {
+          "type": "text"
         },
         "publication_date": {
+          "type": "text"
+        },
+        "publication_authors": {
+          "type": "text"
+        },
+        "publication_abstract": {
           "type": "text"
         },
         "contributors": {

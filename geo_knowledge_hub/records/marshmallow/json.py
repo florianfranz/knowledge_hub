@@ -36,12 +36,17 @@ class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
     id = PersistentIdentifier()
-    title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
-    keywords = fields.List(SanitizedUnicode(), many=True)
+    docset_doi = SanitizedUnicode()
+    docset_title = SanitizedUnicode()
+    docset_abstract = SanitizedUnicode()
+    docset_keywords = fields.List(SanitizedUnicode(), many=True)
+    docset_notes = SanitizedUnicode()
+    publication_type = SanitizedUnicode()
+    publication_doi = SanitizedUnicode()
     publication_date = SanitizedUnicode()
+    publication_authors = fields.List(SanitizedUnicode(), many=True)
+    publication_abstract = SanitizedUnicode()
     contributors = Nested(ContributorSchemaV1, many=True)
-    recid = fields.Integer()
-    resource_type = SanitizedUnicode(required=True, validate=validate.Length(min=3))
 
 class RecordSchemaV1(StrictKeysMixin):
     """Record schema."""
