@@ -32,6 +32,40 @@ class ContributorSchemaV1(StrictKeysMixin):
     email = fields.Email()
 
 
+class PublicationchemaV1(StrictKeysMixin):
+    """Publication Schema"""
+
+    publication_type = SanitizedUnicode()
+    publication_doi = SanitizedUnicode()
+    publication_title = SanitizedUnicode()
+    publication_date = SanitizedUnicode()
+    publication_authors = fields.List(SanitizedUnicode(), many=True)
+    publication_abstract = SanitizedUnicode()
+
+class DatasetSchemaV1(StrictKeysMixin):
+    """Dataset Schema"""
+
+    dataset_doi = SanitizedUnicode()
+    dataset_type = SanitizedUnicode()
+    dataset_title = SanitizedUnicode()
+    dataset_abstract = SanitizedUnicode()
+
+class ToolSchemaV1(StrictKeysMixin):
+    """Tool Schema"""
+
+    tool_doi = SanitizedUnicode()
+    tool_type = SanitizedUnicode()
+    tool_title = SanitizedUnicode()
+    tool_abstract = SanitizedUnicode()
+
+class OutputSchemaV1(StrictKeysMixin):
+    """Output & Product Schema"""
+
+    output_doi = SanitizedUnicode()
+    output_type = SanitizedUnicode()
+    output_title = SanitizedUnicode()
+    output_abstract = SanitizedUnicode()
+
 class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
@@ -41,11 +75,10 @@ class MetadataSchemaV1(StrictKeysMixin):
     docset_abstract = SanitizedUnicode()
     docset_keywords = fields.List(SanitizedUnicode(), many=True)
     docset_notes = SanitizedUnicode()
-    publication_type = SanitizedUnicode()
-    publication_doi = SanitizedUnicode()
-    publication_date = SanitizedUnicode()
-    publication_authors = fields.List(SanitizedUnicode(), many=True)
-    publication_abstract = SanitizedUnicode()
+    publications = Nested(PublicationchemaV1, many=True)
+    datasets = Nested(DatasetSchemaV1, many=True)
+    tools = Nested(ToolSchemaV1, many=True)
+    outputs = Nested(OutputSchemaV1, many=True)
     contributors = Nested(ContributorSchemaV1, many=True)
 
 class RecordSchemaV1(StrictKeysMixin):

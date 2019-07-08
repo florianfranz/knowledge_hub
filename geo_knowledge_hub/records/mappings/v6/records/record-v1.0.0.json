@@ -9,7 +9,7 @@
           "index": false
         },
         "docset_doi": {
-          "type": "keyword"
+          "type": "text"
         },
         "docset_title": {
           "type": "text"
@@ -18,28 +18,85 @@
           "type": "text"
         },
         "docset_keywords": {
-          "type": "keyword"
+          "type": "text"
         },
         "docset_notes": {
-          "tpye": "text"
+          "type": "text"
         },
-        "publication_type": {
+
+        "publications": {
+          "type": "object",
+          "properties": {
+            "publication_type": {
+					"type": "keyword"
+				},
+            "publication_doi": {
+					"type": "text"
+				},
+            "publication_title": {
+					"type": "text"
+				},
+            "publication_date": {
+					"type": "text"
+				},
+            "publication_authors": {
+					"type": "text"
+				},
+            "publication_abstract": {
+					"type": "text"
+				}
+          }
+        },
+        "datasets": {
+          "type": "object",
+          "properties": {
+          "dataset_doi": {
+            "type": "text"
+          },
+          "dataset_type": {
+            "type": "keyword"
+          },
+          "dataset_title": {
+            "type": "text"
+          },
+          "dataset_abstract": {
+            "type": "text"
+          }
+        }
+        },
+        "tools": {
+          "type": "object",
+          "properties": {
+            "tool_doi": {
+          "type": "text"
+        },
+            "tool_type": {
           "type": "keyword"
         },
-        "publication_doi": {
+            "tool_title": {
+          "type": "text"
+        },
+            "tool_abstract": {
+          "type": "text"
+        }
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "properties": {
+            "output_doi": {
+          "type": "text"
+        },
+            "output_type": {
           "type": "keyword"
         },
-        "publication_title": {
+            "output_title": {
           "type": "text"
         },
-        "publication_date": {
+            "output_abstract": {
           "type": "text"
-        },
-        "publication_authors": {
-          "type": "text"
-        },
-        "publication_abstract": {
-          "type": "text"
+        }
+          }
         },
         "contributors": {
           "type": "object",
