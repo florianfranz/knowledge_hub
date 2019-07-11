@@ -296,6 +296,10 @@
 	},
 	"type": "object",
 	"properties": {
+    "title": {
+      "description": "Title of the record",
+      "type": "string"
+    },
     "resource_type": {
     "description": "Type of Resource",
       "enum": [

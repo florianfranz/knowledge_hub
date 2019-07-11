@@ -8,6 +8,9 @@
           "type": "text",
           "index": false
         },
+        "title": {
+          "type": "text"
+        },
         "resource_type": {
           "type": "text"
         },

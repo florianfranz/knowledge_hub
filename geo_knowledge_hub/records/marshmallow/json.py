@@ -88,10 +88,11 @@ class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
     id = PersistentIdentifier()
+    title = SanitizedUnicode()
     resource_type = SanitizedUnicode()
-    docset = Nested(DocsetSchemaV1, many=False)
-    publications = Nested(PublicationchemaV1, many=True)
-    datasets = Nested(DatasetSchemaV1, many=True)
+    docset = fields.Nested(DocsetSchemaV1, many=False)
+    publications = fields.Nested(PublicationchemaV1, many=True)
+    datasets = fields.Nested(DatasetSchemaV1, many=True)
     tools = Nested(ToolSchemaV1, many=True)
     outputs = Nested(OutputSchemaV1, many=True)
     virtenvs = Nested(VirtenvSchemaV1, many=True)
