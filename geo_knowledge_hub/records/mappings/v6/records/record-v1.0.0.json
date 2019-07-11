@@ -8,7 +8,13 @@
           "type": "text",
           "index": false
         },
-        "docset_doi": {
+        "resource_type": {
+          "type": "text"
+        },
+        "docset": {
+          "type": "object",
+          "properties": {
+            "docset_doi": {
           "type": "text"
         },
         "docset_title": {
@@ -22,8 +28,9 @@
         },
         "docset_notes": {
           "type": "text"
+        }
+          }
         },
-
         "publications": {
           "type": "object",
           "properties": {
@@ -109,6 +116,14 @@
           "type": "text"
         },
             "output_link": {
+              "type": "text"
+            }
+          }
+        },
+        "virtenvs": {
+          "type": "object",
+          "properties": {
+            "virtenv_doi": {
               "type": "text"
             }
           }

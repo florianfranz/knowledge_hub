@@ -115,6 +115,36 @@
 			],
 			"type": "string"
 		},
+    "docset": {
+      "type": "object",
+      "properties": {
+        "docset_doi": {
+			"description": "DOI of the whole document set.",
+			"type": "string"
+		},
+		"docset_title": {
+			"description": "Full title of the whole document set.",
+			"type": "string"
+		},
+		"docset_abstract": {
+			"description": "Description or abstract of the whole document set.",
+			"type": "string"
+		},
+		"docset_keywords": {
+			"description": "Free text keywords of the document set.",
+			"items": {
+				"title": "Keyword",
+				"type": "string"
+			},
+			"title": "Document Set Keywords",
+			"type": "array"
+		},
+		"docset_notes": {
+			"description": "Additional notes",
+			"type": "string"
+		}
+      }
+    },
 		"publication": {
 			"type": "object",
 			"properties": {
@@ -252,35 +282,35 @@
 					"type": "string"
         }
 			}
-		}
+		},
+    "virtenv": {
+      "type": "object",
+      "properties": {
+        "virtenv_doi": {
+          "additionalProperties": false,
+					"description": "DOI of the virtual environment.",
+					"type": "string"
+        }
+      }
+    }
 	},
 	"type": "object",
 	"properties": {
-		"docset_doi": {
-			"description": "DOI of the whole document set.",
-			"type": "string"
-		},
-		"docset_title": {
-			"description": "Full title of the whole document set.",
-			"type": "string"
-		},
-		"docset_abstract": {
-			"description": "Description or abstract of the whole document set.",
-			"type": "string"
-		},
-		"docset_keywords": {
-			"description": "Free text keywords of the document set.",
-			"items": {
-				"title": "Keyword",
-				"type": "string"
-			},
-			"title": "Document Set Keywords",
-			"type": "array"
-		},
-		"docset_notes": {
-			"description": "Additional notes",
-			"type": "string"
-		},
+    "resource_type": {
+    "description": "Type of Resource",
+      "enum": [
+        "docset",
+        "publication",
+        "dataset",
+        "tool",
+        "output",
+        "virtenv"
+      ],
+      "type": "string"
+  },
+    "docset": {
+      "$ref": "#/definitions/docset"
+    },
 		"publications": {
 			"type": "array",
 			"items": {
@@ -308,8 +338,14 @@
 				"$ref": "#/definitions/output"
 			},
 			"default": []
+		},
+    "virtenvs": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/virtenv"
+			},
+			"default": []
 		}
 	},
 	"additionalProperties": true,
-	"required": []
 }
