@@ -159,9 +159,20 @@
 					"description": "DOI of the dataset",
 					"type": "string"
 				},
+        "dataset_creator": {
+					"additionalProperties": false,
+					"description": "Creator of the dataset",
+					"type": "string"
+				},
 				"dataset_type": {
 					"additionalProperties": false,
 					"description": "Dataset type",
+					"default": "",
+					"type": "string"
+				},
+        "dataset_date": {
+					"additionalProperties": false,
+					"description": "Dataset date",
 					"default": "",
 					"type": "string"
 				},
@@ -174,7 +185,12 @@
 					"additionalProperties": false,
 					"descriptoin": "Title of the dataset.",
 					"type": "string"
-				}
+				},
+        "dataset_link": {
+          "additionalProperties": false,
+					"description": "Link to the dataset.",
+					"type": "string"
+        }
 			}
 		},
 		"tool": {
@@ -199,7 +215,12 @@
 					"additionalProperties": false,
 					"description": "Abstract of the tool.",
 					"type": "string"
-				}
+				},
+        "tool_link": {
+          "additionalProperties": false,
+					"description": "Link to the tool.",
+					"type": "string"
+        }
 			}
 		},
 		"output": {
@@ -224,7 +245,12 @@
 					"additionalProperties": false,
 					"description": "Abstract of the output/product.",
 					"type": "string"
-				}
+				},
+        "output_link": {
+          "additionalProperties": false,
+					"description": "Link to the output/product.",
+					"type": "string"
+        }
 			}
 		}
 	},
@@ -284,6 +310,6 @@
 			"default": []
 		}
 	},
-	"additionalProperties": false,
+	"additionalProperties": true,
 	"required": []
 }

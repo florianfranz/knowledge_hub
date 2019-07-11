@@ -46,9 +46,12 @@ class DatasetSchemaV1(StrictKeysMixin):
     """Dataset Schema"""
 
     dataset_doi = SanitizedUnicode()
+    dataset_creator = SanitizedUnicode()
     dataset_type = SanitizedUnicode()
+    dataset_date = SanitizedUnicode()
     dataset_title = SanitizedUnicode()
     dataset_abstract = SanitizedUnicode()
+    dataset_link = SanitizedUnicode()
 
 class ToolSchemaV1(StrictKeysMixin):
     """Tool Schema"""
@@ -57,6 +60,7 @@ class ToolSchemaV1(StrictKeysMixin):
     tool_type = SanitizedUnicode()
     tool_title = SanitizedUnicode()
     tool_abstract = SanitizedUnicode()
+    tool_link = SanitizedUnicode()
 
 class OutputSchemaV1(StrictKeysMixin):
     """Output & Product Schema"""
@@ -65,6 +69,7 @@ class OutputSchemaV1(StrictKeysMixin):
     output_type = SanitizedUnicode()
     output_title = SanitizedUnicode()
     output_abstract = SanitizedUnicode()
+    output_link = SanitizedUnicode()
 
 class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""

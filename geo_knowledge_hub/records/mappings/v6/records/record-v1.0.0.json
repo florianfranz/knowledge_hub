@@ -53,16 +53,25 @@
           "dataset_doi": {
             "type": "text"
           },
+            "dataset_creator": {
+              "type": "text"
+            },
           "dataset_type": {
             "type": "keyword"
+          },
+            "dataset_date": {
+            "type": "text"
           },
           "dataset_title": {
             "type": "text"
           },
           "dataset_abstract": {
             "type": "text"
+          },
+            "dataset_link": {
+            "type": "text"
           }
-        }
+          }
         },
         "tools": {
           "type": "object",
@@ -78,7 +87,10 @@
         },
             "tool_abstract": {
           "type": "text"
-        }
+        },
+            "tool_link": {
+              "type": "text"
+            }
           }
         },
         "outputs": {
@@ -95,7 +107,10 @@
         },
             "output_abstract": {
           "type": "text"
-        }
+        },
+            "output_link": {
+              "type": "text"
+            }
           }
         },
         "contributors": {
