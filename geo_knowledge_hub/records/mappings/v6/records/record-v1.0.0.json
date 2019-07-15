@@ -8,27 +8,95 @@
           "type": "text",
           "index": false
         },
-        "recid": {
-          "type": "integer"
-        },
-        "resource_type": {
+        "docset_doi": {
           "type": "text"
         },
-        "title": {
-          "type": "text",
-          "copy_to": "suggest_title"
-        },
-        "suggest_title": {
-          "type": "completion"
-        },
-        "id": {
-          "type": "keyword"
-        },
-        "keywords": {
-          "type": "keyword"
-        },
-        "publication_date": {
+        "docset_title": {
           "type": "text"
+        },
+        "docset_abstract": {
+          "type": "text"
+        },
+        "docset_keywords": {
+          "type": "text"
+        },
+        "docset_notes": {
+          "type": "text"
+        },
+
+        "publications": {
+          "type": "object",
+          "properties": {
+            "publication_type": {
+					"type": "keyword"
+				},
+            "publication_doi": {
+					"type": "text"
+				},
+            "publication_title": {
+					"type": "text"
+				},
+            "publication_date": {
+					"type": "text"
+				},
+            "publication_authors": {
+					"type": "text"
+				},
+            "publication_abstract": {
+					"type": "text"
+				}
+          }
+        },
+        "datasets": {
+          "type": "object",
+          "properties": {
+          "dataset_doi": {
+            "type": "text"
+          },
+          "dataset_type": {
+            "type": "keyword"
+          },
+          "dataset_title": {
+            "type": "text"
+          },
+          "dataset_abstract": {
+            "type": "text"
+          }
+        }
+        },
+        "tools": {
+          "type": "object",
+          "properties": {
+            "tool_doi": {
+          "type": "text"
+        },
+            "tool_type": {
+          "type": "keyword"
+        },
+            "tool_title": {
+          "type": "text"
+        },
+            "tool_abstract": {
+          "type": "text"
+        }
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "properties": {
+            "output_doi": {
+          "type": "text"
+        },
+            "output_type": {
+          "type": "keyword"
+        },
+            "output_title": {
+          "type": "text"
+        },
+            "output_abstract": {
+          "type": "text"
+        }
+          }
         },
         "contributors": {
           "type": "object",

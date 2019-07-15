@@ -1,279 +1,289 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://localhost/schemas/records/record-v1.0.0.json",
-  "title": "GEO Knowledge Hub v1.0.0",
-  "definitions": {
-    "contributor_person_or_org": {
-      "additionalProperties": false,
-      "properties": {
-        "affiliation": {
-          "description": "Affiliation for the purpose of this specific record.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Full name of person or organisation. Personal name format: family, given.",
-          "type": "string"
-        },
-        "orcid": {
-          "description": "ORCID identifier for creator.",
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "ContactPerson",
-            "DataCollector",
-            "DataCurator",
-            "DataManager",
-            "Distributor",
-            "Editor",
-            "HostingInstitution",
-            "Other",
-            "Producer",
-            "ProjectLeader",
-            "ProjectManager",
-            "ProjectMember",
-            "RegistrationAgency",
-            "RegistrationAuthority",
-            "RelatedPerson",
-            "Researcher",
-            "ResearchGroup",
-            "RightsHolder",
-            "Sponsor",
-            "Supervisor",
-            "WorkPackageLeader"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object"
-    },
-    "relation": {
-      "description": "Relation type.",
-      "enum": [
-        "isCitedBy",
-        "cites",
-        "isSupplementTo",
-        "isSupplementedBy",
-        "isContinuedBy",
-        "continues",
-        "hasMetadata",
-        "isMetadataFor",
-        "isNewVersionOf",
-        "isPreviousVersionOf",
-        "isPartOf",
-        "hasPart",
-        "isReferencedBy",
-        "references",
-        "isDocumentedBy",
-        "documents",
-        "isCompiledBy",
-        "compiles",
-        "isVariantFormOf",
-        "isOrignialFormOf",
-        "isIdenticalTo",
-        "isReviewedBy",
-        "reviews",
-        "isDerivedFrom",
-        "isSourceOf"
-      ],
-      "type": "string"
-    },
-    "scheme": {
-      "description": "Persistent identifier scheme.",
-      "enum": [
-        "ads",
-        "ark",
-        "arxiv",
-        "bioproject",
-        "biosample",
-        "doi",
-        "ean13",
-        "ean8",
-        "ensembl",
-        "genome",
-        "gnd",
-        "hal",
-        "handle",
-        "isbn",
-        "isni",
-        "issn",
-        "istc",
-        "lsid",
-        "orcid",
-        "pmcid",
-        "pmid",
-        "purl",
-        "refseq",
-        "sra",
-        "uniprot",
-        "url",
-        "urn"
-      ],
-      "type": "string"
-    }
-  },
-  "type": "object",
-  "properties": {
-    "recid": {
-      "description": "Invenio record identifier (integer).",
-      "type": "number"
-    },
-    "doi": {
-      "description": "Digital Object Identifier (DOI).",
-      "type": "string"
-    },
-    "resource_type": {
-      "description": "Resource type.",
-      "enum": [
-        "DocumentSet",
-        "Publication",
-        "Dataset",
-        "Software",
-        "Video",
-        "Image",
-        "Presentation"
-      ],
-      "type": "string"
-    },
-    "publication_type": {
-      "additionalProperties": false,
-      "description": "Publication type.",
-      "default": "article",
-      "type": {
-        "enum": [
-          "book",
-          "section",
-          "conferencepaper",
-          "article",
-          "patent",
-          "preprint",
-          "report",
-          "deliverable",
-          "milestone",
-          "proposal",
-          "softwaredocumentation",
-          "thesis",
-          "technicalnote",
-          "workingpaper",
-          "datamanagementplan",
-          "annotationcollection",
-          "other"
-        ],
-        "type": "string"
-      }
-    },
-    "dataset_type": {
-      "additionalProperties": false,
-      "description": "Dataset type.",
-      "default": "remotesensing",
-      "type": {
-        "enum": [
-          "multitype",
-          "remotesensing",
-          "insitu",
-          "ancillary",
-          "other"
-        ],
-        "type": "string"
-      }
-    },
-    "image_type": {
-      "additionalProperties": false,
-      "default": "figure",
-      "description": "Image type.",
-      "type": {
-        "enum": [
-          "figure",
-          "plot",
-          "drawing",
-          "diagram",
-          "photo",
-          "other"
-        ],
-        "type": "string"
-      }
-    },
-    "title": {
-      "description": "Record title.",
-      "type": "string"
-    },
-    "description": {
-      "description": "Description/abstract for record.",
-      "type": "string"
-    },
-    "keywords": {
-      "description": "Free text keywords.",
-      "items": {
-        "title": "Keyword",
-        "type": "string"
-      },
-      "title": "Keywords",
-      "type": "array"
-    },
-    "license": {
-      "description": "License for the content.",
-      "title": "License",
-      "type": "object"
-    },
-    "publication_date": {
-      "description": "Record publication date (IS8601-formatted). EDTF support to be added for field.",
-      "type": "string"
-    },
-    "alternate_identifiers": {
-      "description": "Alternate identifiers for record.",
-      "items": {
-        "additionalProperties": false,
-        "properties": {
-          "identifier": {
-            "description": "Identifier of research output.",
-            "type": "string"
-          },
-          "scheme": {
-            "$ref": "#/definitions/scheme"
-          }
-        },
-        "required": [
-          "identifier",
-          "scheme"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "related_identifiers": {
-      "description": "Related research outputs.",
-      "items": {
-        "properties": {
-          "scheme": {
-            "$ref": "#/definitions/scheme"
-          },
-          "identifier": {
-            "description": "Identifier of research output.",
-            "type": "string"
-          },
-          "relation": {
-            "$ref": "#/definitions/relation"
-          }
-        },
-        "required": [
-          "identifier",
-          "relation",
-          "scheme"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    }
-  },
-  "additionalProperties": false,
-  "required": [
-    "recid",
-    "resource_type",
-    "title",
-    "publication_date"
-  ]
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://localhost/schemas/records/record-v1.0.0.json",
+	"title": "GEO Knowledge Hub v1.0.0",
+	"definitions": {
+		"contributor_person_or_org": {
+			"additionalProperties": false,
+			"properties": {
+				"affiliation": {
+					"description": "Affiliation for the purpose of this specific record.",
+					"type": "string"
+				},
+				"name": {
+					"description": "Full name of person or organisation. Personal name format: family, given.",
+					"type": "string"
+				},
+				"orcid": {
+					"description": "ORCID identifier for creator.",
+					"type": "string"
+				},
+				"type": {
+					"enum": [
+						"ContactPerson",
+						"DataCollector",
+						"DataCurator",
+						"DataManager",
+						"Distributor",
+						"Editor",
+						"HostingInstitution",
+						"Other",
+						"Producer",
+						"ProjectLeader",
+						"ProjectManager",
+						"ProjectMember",
+						"RegistrationAgency",
+						"RegistrationAuthority",
+						"RelatedPerson",
+						"Researcher",
+						"ResearchGroup",
+						"RightsHolder",
+						"Sponsor",
+						"Supervisor",
+						"WorkPackageLeader"
+					],
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"type"
+			],
+			"type": "object"
+		},
+		"relation": {
+			"description": "Relation type.",
+			"enum": [
+				"isCitedBy",
+				"cites",
+				"isSupplementTo",
+				"isSupplementedBy",
+				"isContinuedBy",
+				"continues",
+				"hasMetadata",
+				"isMetadataFor",
+				"isNewVersionOf",
+				"isPreviousVersionOf",
+				"isPartOf",
+				"hasPart",
+				"isReferencedBy",
+				"references",
+				"isDocumentedBy",
+				"documents",
+				"isCompiledBy",
+				"compiles",
+				"isVariantFormOf",
+				"isOrignialFormOf",
+				"isIdenticalTo",
+				"isReviewedBy",
+				"reviews",
+				"isDerivedFrom",
+				"isSourceOf"
+			],
+			"type": "string"
+		},
+		"scheme": {
+			"description": "Persistent identifier scheme.",
+			"enum": [
+				"ads",
+				"ark",
+				"arxiv",
+				"bioproject",
+				"biosample",
+				"doi",
+				"ean13",
+				"ean8",
+				"ensembl",
+				"genome",
+				"gnd",
+				"hal",
+				"handle",
+				"isbn",
+				"isni",
+				"issn",
+				"istc",
+				"lsid",
+				"orcid",
+				"pmcid",
+				"pmid",
+				"purl",
+				"refseq",
+				"sra",
+				"uniprot",
+				"url",
+				"urn"
+			],
+			"type": "string"
+		},
+		"publication": {
+			"type": "object",
+			"properties": {
+				"publication_type": {
+					"additionalProperties": false,
+					"description": "Publication type.",
+					"default": "article",
+					"type": "string"
+				},
+				"publication_doi": {
+					"description": "DOI of the publication",
+					"type": "string"
+				},
+				"publication_title": {
+					"description": "Title of the publication",
+					"type": "string"
+				},
+				"publication_date": {
+					"description": "Record publication date (IS8601-formatted). EDTF support to be added for field.",
+					"type": "string"
+				},
+				"publication_authors": {
+					"description": "Author(s) of the publication",
+					"items": {
+						"title": "Author",
+						"type": "string"
+					},
+					"title": "Authors",
+					"type": "array"
+				},
+				"publication_abstract": {
+					"description": "Abstract of the publication",
+					"type": "string"
+				}
+			}
+		},
+		"dataset": {
+			"type": "object",
+			"properties": {
+				"dataset_doi": {
+					"additionalProperties": false,
+					"description": "DOI of the dataset",
+					"type": "string"
+				},
+				"dataset_type": {
+					"additionalProperties": false,
+					"description": "Dataset type",
+					"default": "",
+					"type": "string"
+				},
+				"dataset_title": {
+					"additionalProperties": false,
+					"descriptoin": "Title of the dataset.",
+					"type": "string"
+				},
+				"dataset_abstract": {
+					"additionalProperties": false,
+					"descriptoin": "Title of the dataset.",
+					"type": "string"
+				}
+			}
+		},
+		"tool": {
+			"type": "object",
+			"properties": {
+				"tool_doi": {
+					"additionalProperties": false,
+					"description": "DOI of the tool.",
+					"type": "string"
+				},
+				"tool_type": {
+					"additionalProperties": false,
+					"description": "Type of the tool.",
+					"type": "string"
+				},
+				"tool_title": {
+					"additionalProperties": false,
+					"description": "Title of the tool.",
+					"type": "string"
+				},
+				"tool_abstract": {
+					"additionalProperties": false,
+					"description": "Abstract of the tool.",
+					"type": "string"
+				}
+			}
+		},
+		"output": {
+			"type": "object",
+			"properties": {
+				"output_doi": {
+					"additionalProperties": false,
+					"description": "DOI of the output/product.",
+					"type": "string"
+				},
+				"output_type": {
+					"additionalProperties": false,
+					"description": "Type of output/product.",
+					"type": "string"
+				},
+				"output_title": {
+					"additionalProperties": false,
+					"description": "Title of the output/product.",
+					"type": "string"
+				},
+				"output_abstract": {
+					"additionalProperties": false,
+					"description": "Abstract of the output/product.",
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "object",
+	"properties": {
+		"docset_doi": {
+			"description": "DOI of the whole document set.",
+			"type": "string"
+		},
+		"docset_title": {
+			"description": "Full title of the whole document set.",
+			"type": "string"
+		},
+		"docset_abstract": {
+			"description": "Description or abstract of the whole document set.",
+			"type": "string"
+		},
+		"docset_keywords": {
+			"description": "Free text keywords of the document set.",
+			"items": {
+				"title": "Keyword",
+				"type": "string"
+			},
+			"title": "Document Set Keywords",
+			"type": "array"
+		},
+		"docset_notes": {
+			"description": "Additional notes",
+			"type": "string"
+		},
+		"publications": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/publication"
+			},
+			"default": []
+		},
+		"datasets": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/dataset"
+			},
+			"default": []
+		},
+		"tools": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/tool"
+			},
+			"default": []
+		},
+		"outputs": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/output"
+			},
+			"default": []
+		}
+	},
+	"additionalProperties": false,
+	"required": []
 }
