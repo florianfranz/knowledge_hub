@@ -5,9 +5,28 @@ from __future__ import absolute_import, print_function
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FieldList, FormField, Form, validators
 
+class DocsetForm(Form):
+    """Form for document set"""
+
+    docset_doi = StringField(
+        'DOI of the Document Set'
+    )
+    docset_title = StringField(
+        'Title of Document Set'
+    )
+    docset_abstract = StringField(
+        'Abstract of the Document Set'
+    )
+    docset_keywords = FieldList(StringField(
+        'Keywords for the Document Set'
+    ))
+    docset_notes = StringField(
+        'Additional notes or comments on the Document Set'
+    )
 
 class PublicationForm(Form):
     """Form for publication"""
+
     publication_type = StringField(
         'Type of Publication'
     )
@@ -28,6 +47,8 @@ class PublicationForm(Form):
     )
 
 class DatasetForm(Form):
+    """Form for dataset"""
+
     dataset_doi = StringField(
         'DOI of the Dataset'
     )
@@ -51,6 +72,8 @@ class DatasetForm(Form):
     )
 
 class ToolForm(Form):
+    """Form for tools"""
+
     tool_doi = StringField(
         'DOI of the Tool'
     )
@@ -68,6 +91,7 @@ class ToolForm(Form):
     )
 
 class OutputForm(Form):
+    """Form for output & products"""
     output_doi = StringField(
         'DOI of the Output/product'
     )
@@ -84,25 +108,23 @@ class OutputForm(Form):
         'Link to the Output/product'
     )
 
+class VirtenvForm(Form):
+    virtenv_doi = StringField(
+        'DOI of the virtual environment'
+    )
+
 class RecordForm(FlaskForm):
     """A simple deposit form."""
 
-    docset_doi = StringField(
-        'DOI of the Document Set'
+    title = StringField(
+        'Title', [validators.DataRequired()]
     )
-    docset_title = StringField(
-        'Title of Document Set'
+    resource_type = StringField(
+        'Type of resource', [validators.DataRequired()]
     )
-    docset_abstract = StringField(
-        'Abstract of the Document Set'
-    )
-    docset_keywords = FieldList(StringField(
-        'Keywords for the Document Set'
-    ))
-    docset_notes = StringField(
-        'Additional notes or comments on the Document Set'
-    )
+    docset = FormField(DocsetForm)
     publications = FieldList(FormField(PublicationForm))
     datasets = FieldList(FormField(DatasetForm))
     tools = FieldList(FormField(ToolForm))
     outputs = FieldList(FormField(OutputForm))
+    virtenvs = FieldList(FormField(VirtenvForm))

@@ -31,15 +31,14 @@ def create():
         # create the record
         create_record(
           dict(
-            docset_doi=form.docset_doi.data,
-            docset_title=form.docset_title.data,
-            docset_abstract=form.docset_abstract.data,
-            docset_keywords=form.docset_keywords.data,
-            docset_notes=form.docset_notes.data,
+            title=form.title.data,
+            resource_type=form.resource_type.data,
+            docset=form.docset.data,
             publications=form.publications.data,
             datasets=form.datasets.data,
             tools=form.tools.data,
             outputs=form.outputs.data,
+            virtenvs=form.virtenv.data,
           )
         )
         # redirect to the success page
