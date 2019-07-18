@@ -31,6 +31,14 @@ class ContributorSchemaV1(StrictKeysMixin):
     affiliations = fields.List(SanitizedUnicode())
     email = fields.Email()
 
+class DocsetSchemaV1(StrictKeysMixin):
+    """DocumentSet Schema"""
+
+    docset_doi = SanitizedUnicode()
+    docset_title = SanitizedUnicode()
+    docset_abstract = SanitizedUnicode()
+    docset_keywords = fields.List(SanitizedUnicode(), many=True)
+    docset_notes = SanitizedUnicode()
 
 class PublicationchemaV1(StrictKeysMixin):
     """Publication Schema"""
@@ -46,9 +54,12 @@ class DatasetSchemaV1(StrictKeysMixin):
     """Dataset Schema"""
 
     dataset_doi = SanitizedUnicode()
+    dataset_creator = SanitizedUnicode()
     dataset_type = SanitizedUnicode()
+    dataset_date = SanitizedUnicode()
     dataset_title = SanitizedUnicode()
     dataset_abstract = SanitizedUnicode()
+    dataset_link = SanitizedUnicode()
 
 class ToolSchemaV1(StrictKeysMixin):
     """Tool Schema"""
@@ -57,6 +68,7 @@ class ToolSchemaV1(StrictKeysMixin):
     tool_type = SanitizedUnicode()
     tool_title = SanitizedUnicode()
     tool_abstract = SanitizedUnicode()
+    tool_link = SanitizedUnicode()
 
 class OutputSchemaV1(StrictKeysMixin):
     """Output & Product Schema"""
@@ -65,20 +77,25 @@ class OutputSchemaV1(StrictKeysMixin):
     output_type = SanitizedUnicode()
     output_title = SanitizedUnicode()
     output_abstract = SanitizedUnicode()
+    output_link = SanitizedUnicode()
+
+class VirtenvSchemaV1(StrictKeysMixin):
+    """Virtual Environment Schema"""
+
+    virtenv_doi = SanitizedUnicode()
 
 class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
     id = PersistentIdentifier()
-    docset_doi = SanitizedUnicode()
-    docset_title = SanitizedUnicode()
-    docset_abstract = SanitizedUnicode()
-    docset_keywords = fields.List(SanitizedUnicode(), many=True)
-    docset_notes = SanitizedUnicode()
-    publications = Nested(PublicationchemaV1, many=True)
-    datasets = Nested(DatasetSchemaV1, many=True)
+    title = SanitizedUnicode()
+    resource_type = SanitizedUnicode()
+    docset = fields.Nested(DocsetSchemaV1, many=False)
+    publications = fields.Nested(PublicationchemaV1, many=True)
+    datasets = fields.Nested(DatasetSchemaV1, many=True)
     tools = Nested(ToolSchemaV1, many=True)
     outputs = Nested(OutputSchemaV1, many=True)
+    virtenvs = Nested(VirtenvSchemaV1, many=True)
     contributors = Nested(ContributorSchemaV1, many=True)
 
 class RecordSchemaV1(StrictKeysMixin):

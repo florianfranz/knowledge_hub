@@ -6,7 +6,7 @@ from flask import Blueprint, redirect, render_template, url_for
 from flask_login import login_required
 from flask_security import current_user
 
-from .forms import RecordForm
+from .forms import RecordForm, PublicationForm
 from .api import create_record
 
 
@@ -32,9 +32,13 @@ def create():
         create_record(
           dict(
             title=form.title.data,
-            recid=form.recid.data,
-            publication_date=form.publication_date.data,
             resource_type=form.resource_type.data,
+            docset=form.docset.data,
+            publications=form.publications.data,
+            datasets=form.datasets.data,
+            tools=form.tools.data,
+            outputs=form.outputs.data,
+            virtenvs=form.virtenv.data,
           )
         )
         # redirect to the success page

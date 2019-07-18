@@ -115,6 +115,36 @@
 			],
 			"type": "string"
 		},
+    "docset": {
+      "type": "object",
+      "properties": {
+        "docset_doi": {
+			"description": "DOI of the whole document set.",
+			"type": "string"
+		},
+		"docset_title": {
+			"description": "Full title of the whole document set.",
+			"type": "string"
+		},
+		"docset_abstract": {
+			"description": "Description or abstract of the whole document set.",
+			"type": "string"
+		},
+		"docset_keywords": {
+			"description": "Free text keywords of the document set.",
+			"items": {
+				"title": "Keyword",
+				"type": "string"
+			},
+			"title": "Document Set Keywords",
+			"type": "array"
+		},
+		"docset_notes": {
+			"description": "Additional notes",
+			"type": "string"
+		}
+      }
+    },
 		"publication": {
 			"type": "object",
 			"properties": {
@@ -159,9 +189,20 @@
 					"description": "DOI of the dataset",
 					"type": "string"
 				},
+        "dataset_creator": {
+					"additionalProperties": false,
+					"description": "Creator of the dataset",
+					"type": "string"
+				},
 				"dataset_type": {
 					"additionalProperties": false,
 					"description": "Dataset type",
+					"default": "",
+					"type": "string"
+				},
+        "dataset_date": {
+					"additionalProperties": false,
+					"description": "Dataset date",
 					"default": "",
 					"type": "string"
 				},
@@ -174,7 +215,12 @@
 					"additionalProperties": false,
 					"descriptoin": "Title of the dataset.",
 					"type": "string"
-				}
+				},
+        "dataset_link": {
+          "additionalProperties": false,
+					"description": "Link to the dataset.",
+					"type": "string"
+        }
 			}
 		},
 		"tool": {
@@ -199,7 +245,12 @@
 					"additionalProperties": false,
 					"description": "Abstract of the tool.",
 					"type": "string"
-				}
+				},
+        "tool_link": {
+          "additionalProperties": false,
+					"description": "Link to the tool.",
+					"type": "string"
+        }
 			}
 		},
 		"output": {
@@ -224,37 +275,46 @@
 					"additionalProperties": false,
 					"description": "Abstract of the output/product.",
 					"type": "string"
-				}
+				},
+        "output_link": {
+          "additionalProperties": false,
+					"description": "Link to the output/product.",
+					"type": "string"
+        }
 			}
-		}
+		},
+    "virtenv": {
+      "type": "object",
+      "properties": {
+        "virtenv_doi": {
+          "additionalProperties": false,
+					"description": "DOI of the virtual environment.",
+					"type": "string"
+        }
+      }
+    }
 	},
 	"type": "object",
 	"properties": {
-		"docset_doi": {
-			"description": "DOI of the whole document set.",
-			"type": "string"
-		},
-		"docset_title": {
-			"description": "Full title of the whole document set.",
-			"type": "string"
-		},
-		"docset_abstract": {
-			"description": "Description or abstract of the whole document set.",
-			"type": "string"
-		},
-		"docset_keywords": {
-			"description": "Free text keywords of the document set.",
-			"items": {
-				"title": "Keyword",
-				"type": "string"
-			},
-			"title": "Document Set Keywords",
-			"type": "array"
-		},
-		"docset_notes": {
-			"description": "Additional notes",
-			"type": "string"
-		},
+    "title": {
+      "description": "Title of the record",
+      "type": "string"
+    },
+    "resource_type": {
+    "description": "Type of Resource",
+      "enum": [
+        "docset",
+        "publication",
+        "dataset",
+        "tool",
+        "output",
+        "virtenv"
+      ],
+      "type": "string"
+  },
+    "docset": {
+      "$ref": "#/definitions/docset"
+    },
 		"publications": {
 			"type": "array",
 			"items": {
@@ -282,8 +342,14 @@
 				"$ref": "#/definitions/output"
 			},
 			"default": []
+		},
+    "virtenvs": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/virtenv"
+			},
+			"default": []
 		}
 	},
-	"additionalProperties": false,
-	"required": []
+	"additionalProperties": true,
 }
