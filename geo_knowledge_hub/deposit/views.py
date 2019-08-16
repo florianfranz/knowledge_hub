@@ -9,7 +9,6 @@ from flask_security import current_user
 from .forms import RecordForm, PublicationForm
 from .api import create_record
 
-
 # define a new Flask Blueprint that is register under the url path /deposit
 blueprint = Blueprint(
     'deposit',
@@ -38,16 +37,18 @@ def create():
             datasets=form.datasets.data,
             tools=form.tools.data,
             outputs=form.outputs.data,
-            virtenvs=form.virtenv.data,
+            virtenvs=form.virtenvs.data,
           )
         )
         # redirect to the success page
         return redirect(url_for('deposit.success'))
     return render_template('deposit/create.html', form=form)
 
-
 @blueprint.route("/success")
 @login_required
 def success():
     """The success view."""
     return render_template('deposit/success.html')
+
+a =1
+print(a)

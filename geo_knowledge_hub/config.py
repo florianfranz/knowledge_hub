@@ -62,6 +62,8 @@ THEME_FRONTPAGE = True
 THEME_FRONTPAGE_TITLE = _('GEO Knowledge Hub')
 #: Frontpage template.
 THEME_FRONTPAGE_TEMPLATE = 'geo_knowledge_hub/frontpage.html'
+#: Theme logo.
+THEME_LOGO = 'images/geo_knowledge_hub_logo.svg'
 
 # Email configuration
 # ===================
