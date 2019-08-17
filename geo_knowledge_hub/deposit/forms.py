@@ -19,7 +19,7 @@ class DocsetForm(Form):
     )
     docset_keywords = FieldList(StringField(
         'Keywords for the Document Set'
-    ))
+    ), min_entries=2, max_entries=None)
     docset_notes = StringField(
         'Additional notes or comments on the Document Set'
     )
@@ -41,7 +41,7 @@ class PublicationForm(Form):
     )
     publication_authors = FieldList(StringField(
         'Authors of the Publication'
-    ))
+    ), min_entries=3, max_entries=None)
     publication_abstract = StringField(
         'Abstract of the Publication'
     )
@@ -123,8 +123,8 @@ class RecordForm(FlaskForm):
         'Type of resource', [validators.DataRequired()]
     )
     docset = FormField(DocsetForm)
-    publications = FieldList(FormField(PublicationForm))
-    datasets = FieldList(FormField(DatasetForm))
-    tools = FieldList(FormField(ToolForm))
-    outputs = FieldList(FormField(OutputForm))
-    virtenvs = FieldList(FormField(VirtenvForm))
+    publications = FieldList(FormField(PublicationForm), min_entries=3, max_entries= None)
+    datasets = FieldList(FormField(DatasetForm), min_entries=2, max_entries = None)
+    tools = FieldList(FormField(ToolForm), min_entries=1, max_entries=None)
+    outputs = FieldList(FormField(OutputForm), min_entries=1, max_entries=None)
+    virtenvs = FieldList(FormField(VirtenvForm), min_entries=1, max_entries=None)
