@@ -145,6 +145,10 @@
 		}
       }
     },
+    "bucket": {
+      "description": "Deposit of uploaded documents",
+      "type": "string"
+    },
 		"publication": {
 			"type": "object",
 			"properties": {

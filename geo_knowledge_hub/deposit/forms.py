@@ -3,7 +3,8 @@
 from __future__ import absolute_import, print_function
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FieldList, FormField, Form, validators
+from wtforms import StringField, IntegerField, FieldList, FormField, Form, validators, HiddenField
+
 
 class DocsetForm(Form):
     """Form for document set"""
@@ -122,6 +123,9 @@ class RecordForm(FlaskForm):
     resource_type = StringField(
         'Type of resource', [validators.DataRequired()]
     )
+    # Store bucket identifier containing the uploaded files
+    bucket = HiddenField('Bucket', )
+
     docset = FormField(DocsetForm)
     publications = FieldList(FormField(PublicationForm), min_entries=3, max_entries= None)
     datasets = FieldList(FormField(DatasetForm), min_entries=2, max_entries = None)

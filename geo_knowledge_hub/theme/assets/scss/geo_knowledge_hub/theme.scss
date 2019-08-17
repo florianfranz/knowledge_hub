@@ -10,6 +10,8 @@
 @import "variables";
 @import "../invenio_theme/styles";
 
+@import "~bootstrap-fileinput/scss/fileinput.scss";
+
 .navbar-brand {
     min-height: 96px;
 }

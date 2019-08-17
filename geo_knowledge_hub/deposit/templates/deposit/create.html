@@ -15,6 +15,15 @@ border: 1px solid black;
 </style>
 {%- extends config.BASE_TEMPLATE %}
 
+{%- block javascript %}
+  <!-- Inherit parent js -->
+  {{ super() }}
+
+  <!-- Geo Knowledge Hub Deposit JS -->
+  {{ webpack['js_deposit.js'] }}
+
+{%- endblock javascript %}
+
 {% macro errors(field) %}
   {% if field.errors %}
   <span class="help-block">
@@ -34,11 +43,27 @@ border: 1px solid black;
         <h2>Create record</h2>
       </div>
       <div  id="form" style="height: auto;">
-        <form action="{{ url_for('deposit.create') }}" method="POST">
-            <div id="title" class="form-group {{ 'has-error' if form.title.errors }}">
-              <label for="title">{{ form.title.label }}</label>
-              {{ form.title(class_="form-control")|safe }}
-              {{ errors(form.title) }}
+
+        <form action="{{ url_for('deposit.create') }}" method="POST" data-bucket-id="" enctype="multipart/form-data">
+          <div class="form-group">
+            <div class="well">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="document">Choose files to document</label>
+                  <div class="input-group">
+                    <input class="form-control" id="document" name="document[]" multiple type="file">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{ form.bucket }}
+
+          <div id="title" class="form-group {{ 'has-error' if form.title.errors }}">
+            <label for="title">{{ form.title.label }}</label>
+            {{ form.title(class_="form-control")|safe }}
+            {{ errors(form.title) }}
             </div>
             <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
               <label for="resource_type">{{ form.resource_type.label }}</label>
