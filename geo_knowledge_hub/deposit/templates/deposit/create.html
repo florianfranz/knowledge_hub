@@ -37,13 +37,12 @@ border: 1px solid black;
 {% endmacro %}
 
 {% block page_body %}
-  <div class="container">
+  <div class="container" ng-app="knowledge_hub.directives">
     <div class="row">
       <div class="col-md-12">
         <h2>Create record</h2>
       </div>
       <div  id="form" style="height: auto;">
-
         <form action="{{ url_for('deposit.create') }}" method="POST" data-bucket-id="" enctype="multipart/form-data">
           <div class="form-group">
             <div class="well">
@@ -75,16 +74,15 @@ border: 1px solid black;
               {{ form.docset(class_="form-control")|safe }}
               {{ errors(form.docset) }}
             </div>
-            <div id="publications" style="height: 920px;" class="form-group {{ 'has-error' if form.publications.errors }}">
-              <label for="publications">{{ form.publications.label }}</label>
-              {{ form.publications(class_="form-control")|safe }}
-              {{ errors(form.publications) }}
-            </div>
-            <div id="datasets"  style="height: 560px;"class="form-group {{ 'has-error' if form.datasets.errors }}">
-              <label for="datasets">{{ form.datasets.label }}</label>
-              {{ form.datasets(class_="form-control")|safe }}
-              {{ errors(form.datasets) }}
-            </div>
+
+            <list-item title="Publications" id="publication">
+              <publication item="$parent.item"></publication>
+            </list-item>
+
+            <list-item title="Datasets" id="dataset">
+              <dataset item="$parent.item"></dataset>
+            </list-item>
+
             <div id="tools" style="height: 240px;" class="form-group {{ 'has-error' if form.tools.errors }}">
               <label for="tools" >{{ form.tools.label }} </label>
               {{ form.tools(class_="form-control")|safe }}
