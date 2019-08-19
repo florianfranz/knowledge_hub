@@ -41,7 +41,7 @@ export const publicationDirective = () => ({
   link: publicationLink,
   bindToController: true,
   template: `
-    <div> ID - {{ $ctrl.item.id }}
+    <div>
       <div class="form-group schema-form-text has-feedback">
         <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_doi">DOI</label>
         <input type="text" step="any" placeholder="" class="form-control"
