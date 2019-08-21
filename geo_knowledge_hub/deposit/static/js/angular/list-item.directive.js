@@ -45,7 +45,8 @@ export function listItemDirective() {
     controller: ['$scope', ListItemController],
     controllerAs: '$ctrl',
     scope: {
-      title: '@'
+      title: '@',
+      minItems: '=?'
     },
     bindToController: true,
     transclude: true,
@@ -60,7 +61,7 @@ export function listItemDirective() {
     template: `
       <div class="form-group">
         <h4 class=""><i class="icon-plus-sign-alt"></i> {{ $ctrl.title }}</h4>
-        <hr>
+        <hr />
 
         <div class="row">
           <div class="col-md-11">
@@ -79,7 +80,9 @@ export function listItemDirective() {
                   </h4>
                 </div>
                 <div id="collapse-{{$ctrl.class_id}}-{{$index}}" class="panel-collapse collapse">
-                  <div class="panel-body"><ng-transclude></ng-transclude></div>
+                  <div class="panel-body">
+                    <ng-transclude></ng-transclude>
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,7 +104,16 @@ export function listItemDirective() {
    * @param {angular.IScope} $scope
    */
   function ListItemController($scope) {
-    this.items = [{ id: 1 }];
+    if (!this.minItems) {
+      this.minItems = 0;
+    }
+
+    this.items = [];
+
+    for(let i = 0; i < this.minItems; ++i) {
+      this.items.push({ id: i })
+    }
+
     this.$scope = $scope;
     this.validators = [];
 
@@ -109,15 +121,15 @@ export function listItemDirective() {
       if (!this.isValid()) {
         return alert('Fill all required fields before insert new one');
       }
-//
-//      const newItem = { id: ++this.items.length };
-//
-//      this.items.push(newItem);
+
+      const newItem = { id: this.items.length + 1 };
+
+      this.items.push(newItem);
     }
 
     this.removeItem = (index) => {
-      if (this.items.length === 1) {
-        return alert('At least one item required')
+      if (this.items.length === this.minItems) {
+        return alert(`At least ${this.minItems} item required.`)
       }
 
       this.items.splice(index, 1);

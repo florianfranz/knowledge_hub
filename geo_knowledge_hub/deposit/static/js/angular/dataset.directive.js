@@ -8,7 +8,7 @@ class DataSetController {
   validate() {
     const { dataset_creator, dataset_type, dataset_doi } = this.item;
 
-    console.log(this);
+    console.log("Validating dataset", this);
 
     return !!dataset_creator && !!dataset_type && !!dataset_doi;
   }
@@ -104,6 +104,7 @@ export const dataSetDirective = () => ({
             <textarea placeholder="" class="form-control"
                       id="datasets-{{ $ctrl.item.id }}-dataset_abstract"
                       ng-model="$ctrl.item.dataset_abstract" name="datasets-{{ $ctrl.item.id }}-dataset_abstract">
+            </textarea>
           </div>
         </div>
       </div>

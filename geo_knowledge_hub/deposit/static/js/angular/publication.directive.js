@@ -8,6 +8,8 @@ class PublicationController {
   validate() {
     const { publication_title, publication_authors, publication_doi } = this.item;
 
+    console.log("Validating publication", this);
+
     return !!publication_title && !!publication_authors && !!publication_doi;
   }
 }
@@ -39,34 +41,43 @@ export const publicationDirective = () => ({
   link: publicationLink,
   bindToController: true,
   template: `
-    <div>
-      <div class="form-group schema-form-text has-feedback">
-        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_doi">DOI</label>
-        <input type="text" step="any" placeholder="" class="form-control"
-               id="publications-{{ $ctrl.item.id }}-publication_doi"
-               ng-model="$ctrl.item.publication_doi" name="publications-{{ $ctrl.item.id }}-publication_doi">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group schema-form-text has-feedback">
+          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_doi">DOI</label>
+          <input type="text" step="any" placeholder="" class="form-control"
+                id="publications-{{ $ctrl.item.id }}-publication_doi"
+                ng-model="$ctrl.item.publication_doi" name="publications-{{ $ctrl.item.id }}-publication_doi">
+        </div>
       </div>
 
-      <div class="form-group schema-form-text has-feedback">
-        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_title">Title</label>
-        <input type="text" step="any" placeholder="" class="form-control"
-               id="publications-{{ $ctrl.item.id }}-publication_title"
-               ng-model="$ctrl.item.publication_title" name="publications-{{ $ctrl.item.id }}-publication_title">
+      <div class="col-md-12">
+        <div class="form-group schema-form-text has-feedback">
+          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_title">Title</label>
+          <input type="text" step="any" placeholder="" class="form-control"
+                id="publications-{{ $ctrl.item.id }}-publication_title"
+                ng-model="$ctrl.item.publication_title" name="publications-{{ $ctrl.item.id }}-publication_title">
+        </div>
       </div>
 
-      <div class="form-group schema-form-text has-feedback">
-        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_authors">Authors</label>
-        <input type="text" step="any" placeholder="" class="form-control"
-               id="publications-{{ $ctrl.item.id }}-publication_authors"
-               ng-model="$ctrl.item.publication_authors" name="publications-{{ $ctrl.item.id }}-publication_authors">
+      <div class="col-md-12">
+        <div class="form-group schema-form-text has-feedback">
+          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_authors">Authors</label>
+          <input type="text" step="any" placeholder="" class="form-control"
+                id="publications-{{ $ctrl.item.id }}-publication_authors"
+                ng-model="$ctrl.item.publication_authors" name="publications-{{ $ctrl.item.id }}-publication_authors">
+        </div>
       </div>
 
-      <div class="form-group schema-form-text has-feedback">
-        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_abstract">Abstract</label>
-        <textarea placeholder="" class="form-control"
-                  id="publications-{{ $ctrl.item.id }}-publication_abstract"
-                  ng-model="$ctrl.item.publication_abstract"
-                  name="publications-{{ $ctrl.item.id }}-publication_abstract">
+      <div class="col-md-12">
+        <div class="form-group schema-form-text has-feedback">
+          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_abstract">Abstract</label>
+          <textarea placeholder="" class="form-control"
+                    id="publications-{{ $ctrl.item.id }}-publication_abstract"
+                    ng-model="$ctrl.item.publication_abstract"
+                    name="publications-{{ $ctrl.item.id }}-publication_abstract">
+          </textarea>
+        </div>
       </div>
     </div>
   `

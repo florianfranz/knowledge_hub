@@ -70,24 +70,22 @@ overflow: auto;
             {{ errors(form.docset) }}
           </div>
 
-          <list-item title="Publications" id="publication">
+          <list-item title="Publications" id="publication" min-items="1">
             <publication item="$parent.item"></publication>
           </list-item>
 
-          <list-item title="Datasets" id="dataset">
+          <list-item title="Datasets" id="dataset" min-items="1">
             <dataset item="$parent.item"></dataset>
           </list-item>
 
-          <div id="tools" class="form-group {{ 'has-error' if form.tools.errors }}">
-            <label for="tools" >{{ form.tools.label }} </label>
-            {{ form.tools(class_="list-group")|safe }}
-            {{ errors(form.tools) }}
-          </div>
-          <div id="outputs"  style="height: 240px;" class="form-group {{ 'has-error' if form.outputs.errors }}">
-            <label for="outputs">{{ form.outputs.label }}</label>
-            {{ form.outputs(class_="list-group")|safe }}
-            {{ errors(form.outputs) }}
-          </div>
+          <list-item title="Tools" id="tools" min-items="1">
+            <tool item="$parent.item"></tool>
+          </list-item>
+
+          <list-item title="Outputs" id="outputs" min-items="1">
+            <output item="$parent.item"></output>
+          </list-item>
+
           <div id="virtenvs"style="height: 105px;" class="form-group {{ 'has-error' if form.virtenvs.errors }}">
             <label for="virtenvs">{{ form.virtenvs.label }}</label>
             {{ form.virtenvs(class_="list-group")|safe }}
