@@ -21,10 +21,10 @@ const toolLink = (scope, element, attr, ctrls) => {
 }
 
 /**
- * Angular Directive for Publication
+ * Angular Directive for tool
  *
  * @example
- * <publication></publication>
+ * <tool></tool>
  */
 export const toolDirective = () => ({
   restrict: 'EA',
@@ -70,7 +70,7 @@ export const toolDirective = () => ({
           <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_abstract">Abstract of the Tool	</label>
           <textarea placeholder="" class="form-control"
                     id="tools-{{ $ctrl.item.id }}-tool_abstract"
-                    ng-model="$ctrl.item.publication_abstract"
+                    ng-model="$ctrl.item.tool_abstract"
                     name="tools-{{ $ctrl.item.id }}-tool_abstract">
           </textarea>
         </div>

@@ -25,10 +25,10 @@ const dataSetLink = (scope, element, attr, ctrls) => {
 }
 
 /**
- * Angular Directive for Publication
+ * Angular Directive for dataset
  *
  * @example
- * <publication></publication>
+ * <dataset></dataset>
  */
 export const dataSetDirective = () => ({
   restrict: 'EA',

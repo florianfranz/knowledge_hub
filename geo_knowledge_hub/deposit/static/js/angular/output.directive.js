@@ -17,10 +17,10 @@ const outputLink = (scope, element, attr, ctrls) => {
 }
 
 /**
- * Angular Directive for Publication
+ * Angular Directive for output
  *
  * @example
- * <publication></publication>
+ * <output></output>
  */
 export const outputDirective = () => ({
   restrict: 'EA',
@@ -66,7 +66,7 @@ export const outputDirective = () => ({
           <label class="control-label " for="tools-{{ $ctrl.item.id }}-output_abstract">Abstract of the Output	</label>
           <textarea placeholder="" class="form-control"
                     id="tools-{{ $ctrl.item.id }}-output_abstract"
-                    ng-model="$ctrl.item.publication_abstract"
+                    ng-model="$ctrl.item.output_abstract"
                     name="tools-{{ $ctrl.item.id }}-output_abstract">
           </textarea>
         </div>
