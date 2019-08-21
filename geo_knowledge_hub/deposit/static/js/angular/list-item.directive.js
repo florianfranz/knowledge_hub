@@ -45,50 +45,54 @@ export function listItemDirective() {
     controller: ['$scope', ListItemController],
     controllerAs: '$ctrl',
     scope: {
-      title: '@'
+      title: '@',
+      minItems: '=?'
     },
     bindToController: true,
     transclude: true,
     link: (scope, element, attrs, ctrl) => {
 
       if (attrs['title']) {
-        // scope.title = attrs.title;
         ctrl.title = attrs.title;
       }
 
-      // scope.class_id = attrs.id;
       ctrl.class_id = attrs.id;
     },
     template: `
-      <div class="row">
-        <h3 style="padding-left: 15px;">{{ $ctrl.title }}</h3>
+      <div class="form-group">
+        <h4 class=""><i class="icon-plus-sign-alt"></i> {{ $ctrl.title }}</h4>
+        <hr />
 
-        <div class="col-md-11">
-          <div class="panel-group">
-            <div class="panel panel-default" ng-repeat="item in $ctrl.items track by $index" >
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" href="#collapse-{{$ctrl.class_id}}-{{$index}}">Item {{ $index + 1 }}</a>
+        <div class="row">
+          <div class="col-md-11">
+            <div class="panel-group">
+              <div class="panel panel-default" ng-repeat="item in $ctrl.items track by $index" >
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-{{$ctrl.class_id}}-{{$index}}">Item {{ $index + 1 }}</a>
 
-                  <button ng-click="$ctrl.removeItem($index)"
-                      style="position: relative; z-index: 20;"
-                      type="button" class="close pull-right">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                  </button>
-                </h4>
-              </div>
-              <div id="collapse-{{$ctrl.class_id}}-{{$index}}" class="panel-collapse collapse">
-                <div class="panel-body"><ng-transclude></ng-transclude></div>
+                    <button ng-click="$ctrl.removeItem($index)"
+                        style="position: relative; z-index: 20;"
+                        type="button" class="close pull-right">
+                      <span aria-hidden="true">×</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                  </h4>
+                </div>
+                <div id="collapse-{{$ctrl.class_id}}-{{$index}}" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ng-transclude></ng-transclude>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-1">
-          <button type="button" ng-click="$ctrl.addItem()" class="btn btn-success pull-right">
-            <i class="glyphicon glyphicon-plus"></i> New
-          </button>
+          <div class="col-md-1">
+            <button type="button" ng-click="$ctrl.addItem()" class="btn btn-success pull-right">
+              <i class="glyphicon glyphicon-plus"></i> New
+            </button>
+          </div>
         </div>
       </div>
     `,
@@ -100,7 +104,16 @@ export function listItemDirective() {
    * @param {angular.IScope} $scope
    */
   function ListItemController($scope) {
-    this.items = [{ id: 1 }];
+    if (!this.minItems) {
+      this.minItems = 0;
+    }
+
+    this.items = [];
+
+    for(let i = 0; i < this.minItems; ++i) {
+      this.items.push({ id: i })
+    }
+
     this.$scope = $scope;
     this.validators = [];
 
@@ -109,12 +122,16 @@ export function listItemDirective() {
         return alert('Fill all required fields before insert new one');
       }
 
-      const newItem = { id: ++this.items.length };
+      const newItem = { id: this.items.length + 1 };
 
       this.items.push(newItem);
     }
 
     this.removeItem = (index) => {
+      if (this.items.length === this.minItems) {
+        return alert(`At least ${this.minItems} item required.`)
+      }
+
       this.items.splice(index, 1);
       this.validators.splice(index, 1);
     }
