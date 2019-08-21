@@ -2,13 +2,11 @@ class PublicationController {
   constructor($scope) {
     this.$scope = $scope;
 
-    console.log('scope', $scope);
+    console.log('Create scope Publication', $scope, this);
   }
 
   validate() {
     const { publication_title, publication_authors, publication_doi } = this.item;
-
-    console.log(this);
 
     return !!publication_title && !!publication_authors && !!publication_doi;
   }
@@ -35,7 +33,7 @@ export const publicationDirective = () => ({
   require: ['^^listItem', 'publication'],
   controller: PublicationController,
   scope: {
-    item: '='
+    item: '=',
   },
   controllerAs: '$ctrl',
   link: publicationLink,
@@ -47,9 +45,6 @@ export const publicationDirective = () => ({
         <input type="text" step="any" placeholder="" class="form-control"
                id="publications-{{ $ctrl.item.id }}-publication_doi"
                ng-model="$ctrl.item.publication_doi" name="publications-{{ $ctrl.item.id }}-publication_doi">
-          <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
-                aria-hidden="true"></span>
-
       </div>
 
       <div class="form-group schema-form-text has-feedback">
@@ -57,8 +52,6 @@ export const publicationDirective = () => ({
         <input type="text" step="any" placeholder="" class="form-control"
                id="publications-{{ $ctrl.item.id }}-publication_title"
                ng-model="$ctrl.item.publication_title" name="publications-{{ $ctrl.item.id }}-publication_title">
-          <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
-                aria-hidden="true"></span>
       </div>
 
       <div class="form-group schema-form-text has-feedback">
@@ -66,15 +59,14 @@ export const publicationDirective = () => ({
         <input type="text" step="any" placeholder="" class="form-control"
                id="publications-{{ $ctrl.item.id }}-publication_authors"
                ng-model="$ctrl.item.publication_authors" name="publications-{{ $ctrl.item.id }}-publication_authors">
-          <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
-                aria-hidden="true"></span>
       </div>
 
       <div class="form-group schema-form-text has-feedback">
-        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_abstrac">Abstract</label>
+        <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_abstract">Abstract</label>
         <textarea placeholder="" class="form-control"
                   id="publications-{{ $ctrl.item.id }}-publication_abstract"
-                  ng-model="$ctrl.item.publication_abstract" name="publications-{{ $ctrl.item.id }}-publication_abstract">
+                  ng-model="$ctrl.item.publication_abstract"
+                  name="publications-{{ $ctrl.item.id }}-publication_abstract">
       </div>
     </div>
   `

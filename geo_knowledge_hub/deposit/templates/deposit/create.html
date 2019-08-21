@@ -3,15 +3,7 @@
 .container {
 overflow: auto;
 }
-.form-group {
-position: relative;
-border: 1px solid black;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;
-  background-color: lightgrey;
-  overflow:auto;
-}
+
 </style>
 {%- extends config.BASE_TEMPLATE %}
 
@@ -39,19 +31,18 @@ border: 1px solid black;
 {% block page_body %}
   <div class="container" ng-app="knowledge_hub.directives">
     <div class="row">
-      <div class="col-md-12">
-        <h2>Create record</h2>
-      </div>
-      <div  id="form" style="height: auto;">
+      <h4 class=""><i class="icon-plus-sign-alt"></i> Create record</h4>
+
+      <hr />
+
+      <div id="form" style="height: auto;">
         <form action="{{ url_for('deposit.create') }}" method="POST" data-bucket-id="" enctype="multipart/form-data">
           <div class="form-group">
-            <div class="well">
-              <div class="row">
-                <div class="col-md-12">
-                  <label for="document">Choose files to document</label>
-                  <div class="input-group">
-                    <input class="form-control" id="document" name="document[]" multiple type="file">
-                  </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label for="document">Choose files to document</label>
+                <div class="input-group" style="width:100%">
+                  <input class="form-control" id="document" name="document[]" multiple type="file">
                 </div>
               </div>
             </div>
@@ -63,44 +54,48 @@ border: 1px solid black;
             <label for="title">{{ form.title.label }}</label>
             {{ form.title(class_="form-control")|safe }}
             {{ errors(form.title) }}
-            </div>
-            <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
-              <label for="resource_type">{{ form.resource_type.label }}</label>
-              {{ form.resource_type(class_="form-control")|safe }}
-              {{ errors(form.resource_type) }}
-            </div>
-            <div id="docset" style="height: 250px;" class="form-group {{ 'has-error' if form.docset.errors }}">
-              <label for="docset">{{ form.docset.label }}</label>
-              {{ form.docset(class_="form-control")|safe }}
-              {{ errors(form.docset) }}
-            </div>
+          </div>
+          <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
+            <label for="resource_type">{{ form.resource_type.label }}</label>
+            {{ form.resource_type(class_="form-control")|safe }}
+            {{ errors(form.resource_type) }}
+          </div>
 
-            <list-item title="Publications" id="publication">
-              <publication item="$parent.item"></publication>
-            </list-item>
+          <hr/>
 
-            <list-item title="Datasets" id="dataset">
-              <dataset item="$parent.item"></dataset>
-            </list-item>
+          <div id="docset" class="form-group {{ 'has-error' if form.docset.errors }}">
+            <h4 class=""><i class="icon-plus-sign-alt"></i> {{ form.docset.label }}</h4>
 
-            <div id="tools" style="height: 240px;" class="form-group {{ 'has-error' if form.tools.errors }}">
-              <label for="tools" >{{ form.tools.label }} </label>
-              {{ form.tools(class_="form-control")|safe }}
-              {{ errors(form.tools) }}
-            </div>
-            <div id="outputs"  style="height: 240px;" class="form-group {{ 'has-error' if form.outputs.errors }}">
-              <label for="outputs">{{ form.outputs.label }}</label>
-              {{ form.outputs(class_="form-control")|safe }}
-              {{ errors(form.outputs) }}
-            </div>
-            <div id="virtenvs"style="height: 105px;" class="form-group {{ 'has-error' if form.virtenvs.errors }}">
-              <label for="virtenvs">{{ form.virtenvs.label }}</label>
-              {{ form.virtenvs(class_="form-control")|safe }}
-              {{ errors(form.virtenvs) }}
-            </div>
-            {{ form.csrf_token }}
-            {{ errors(form.csrf_token) }}
-            <button type="submit" class="btn btn-default">Create</button>
+            {{ form.docset(class_="table table-hover", style="font-size: 14px")|safe }}
+            {{ errors(form.docset) }}
+          </div>
+
+          <list-item title="Publications" id="publication">
+            <publication item="$parent.item"></publication>
+          </list-item>
+
+          <list-item title="Datasets" id="dataset">
+            <dataset item="$parent.item"></dataset>
+          </list-item>
+
+          <div id="tools" class="form-group {{ 'has-error' if form.tools.errors }}">
+            <label for="tools" >{{ form.tools.label }} </label>
+            {{ form.tools(class_="list-group")|safe }}
+            {{ errors(form.tools) }}
+          </div>
+          <div id="outputs"  style="height: 240px;" class="form-group {{ 'has-error' if form.outputs.errors }}">
+            <label for="outputs">{{ form.outputs.label }}</label>
+            {{ form.outputs(class_="list-group")|safe }}
+            {{ errors(form.outputs) }}
+          </div>
+          <div id="virtenvs"style="height: 105px;" class="form-group {{ 'has-error' if form.virtenvs.errors }}">
+            <label for="virtenvs">{{ form.virtenvs.label }}</label>
+            {{ form.virtenvs(class_="list-group")|safe }}
+            {{ errors(form.virtenvs) }}
+          </div>
+          {{ form.csrf_token }}
+          {{ errors(form.csrf_token) }}
+          <button type="submit" class="btn btn-default">Create</button>
         </form>
       </div>
     </div>
