@@ -15,12 +15,20 @@ You overwrite and set instance-specific configuration by either:
 
 from __future__ import absolute_import, print_function
 
+import tempfile
 from datetime import timedelta
+from os.path import join as join_path
 
 
 def _(x):
     """Identity function used to trigger string extraction."""
     return x
+
+
+# Knowledge Hub Config
+# ====================
+
+GEO_KNOWLEDGE_HUB_DEFAULT_BUCKET_URL = join_path(tempfile.gettempdir(), 'invenio-data')
 
 
 # Rate limiting

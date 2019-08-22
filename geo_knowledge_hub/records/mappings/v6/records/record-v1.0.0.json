@@ -18,21 +18,24 @@
           "type": "object",
           "properties": {
             "docset_doi": {
-          "type": "text"
-        },
-        "docset_title": {
-          "type": "text"
-        },
-        "docset_abstract": {
-          "type": "text"
-        },
-        "docset_keywords": {
-          "type": "text"
-        },
-        "docset_notes": {
-          "type": "text"
-        }
+              "type": "text"
+            },
+            "docset_title": {
+              "type": "text"
+            },
+            "docset_abstract": {
+              "type": "text"
+            },
+            "docset_keywords": {
+              "type": "text"
+            },
+            "docset_notes": {
+              "type": "text"
+            }
           }
+        },
+        "bucket": {
+          "type": "text"
         },
         "publications": {
           "type": "object",

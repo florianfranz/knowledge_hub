@@ -21,6 +21,11 @@ with open(os.path.join('geo_knowledge_hub', 'version.py'), 'rt') as fp:
     exec(fp.read(), g)
     version = g['__version__']
 
+
+install_requires = [
+    'invenio-files-rest==1.0.0a23.post1'
+]
+
 setup(
     name='geo-knowledge-hub',
     version=version,
@@ -44,11 +49,13 @@ setup(
         ],
         'invenio_base.blueprints': [
             'geo_knowledge_hub = geo_knowledge_hub.theme.views:blueprint',
+            'invenio_files_rest = invenio_files_rest.views:blueprint',
             'geo_knowledge_hub_records = geo_knowledge_hub.records.views:blueprint',
             'geo_knowledge_hub_deposit = geo_knowledge_hub.deposit.views:blueprint',
         ],
         'invenio_assets.webpack': [
             'geo_knowledge_hub_theme = geo_knowledge_hub.theme.webpack:theme',
+            'geo_knowledge_hub_deposit_js = geo_knowledge_hub.deposit.webpack:js_deposit'
         ],
         'invenio_config.module': [
             'geo_knowledge_hub = geo_knowledge_hub.config',
@@ -66,6 +73,7 @@ setup(
             'records = geo_knowledge_hub.records.mappings'
         ],
     },
+    install_requires=install_requires,
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

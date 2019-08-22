@@ -8,6 +8,10 @@
 
 @import "../invenio_theme/variables";
 
+$bootstrap-fileinput-img-path: '~bootstrap-fileinput/img';
+$url-0: '~bootstrap-fileinput/img';
+$url-1: '~bootstrap-fileinput/img';
+
 // Background color
 $color1: rgba(20, 50, 64, 0.8);
 $color1-gradient: lighten($color1, 15%);
