@@ -13,6 +13,7 @@ js_deposit = WebpackBundle(
     },
     dependencies={
         'angular': '^1.7.7',
+        'angular-file-upload': '^2.5.0',
         # File input module
         'bootstrap-fileinput': 'git://github.com/kartik-v/bootstrap-fileinput#94474f4a0f84fa35a08eb8724f8b8391c9806eb9',
         # External Invenio Files JS

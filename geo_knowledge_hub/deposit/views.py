@@ -87,7 +87,10 @@ def create_bucket(bucket_id=None):
             loc = Location(name='local', uri=GEO_KNOWLEDGE_HUB_DEFAULT_BUCKET_URL, default=True)
             db.session.add(loc)
 
-        bucket = db.session.query(Bucket).filter(Bucket.id == bucket_id).first()
+        bucket = None
+
+        if bucket_id:
+            bucket = db.session.query(Bucket).filter(Bucket.id == bucket_id).first()
 
         if not bucket:
             bucket = Bucket.create(
