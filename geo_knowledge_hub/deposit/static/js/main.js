@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import 'bootstrap-fileinput/js/fileinput.min.js';
 import { listFilesFromBucket } from './utils';
+import './angular/app'
 
 
 $(document).ready(function() {
