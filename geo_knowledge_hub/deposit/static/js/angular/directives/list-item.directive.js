@@ -50,52 +50,17 @@ export function listItemDirective() {
     },
     bindToController: true,
     transclude: true,
-    link: (scope, element, attrs, ctrl) => {
+    // template: '<ng-transclude></ng-transclude>',
+    link: (scope, element, attrs, ctrl, transclude) => {
 
       if (attrs['title']) {
         ctrl.title = attrs.title;
       }
 
       ctrl.class_id = attrs.id;
-    },
-    template: `
-      <div class="form-group">
-        <h4 class=""><i class="icon-plus-sign-alt"></i> {{ $ctrl.title }}</h4>
-        <hr />
 
-        <div class="row">
-          <div class="col-md-11">
-            <div class="panel-group">
-              <div class="panel panel-default" ng-repeat="item in $ctrl.items track by $index" >
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse-{{$ctrl.class_id}}-{{$index}}">Item {{ $index + 1 }}</a>
-
-                    <button ng-click="$ctrl.removeItem($index)"
-                        style="position: relative; z-index: 20;"
-                        type="button" class="close pull-right">
-                      <span aria-hidden="true">×</span>
-                      <span class="sr-only">Close</span>
-                    </button>
-                  </h4>
-                </div>
-                <div id="collapse-{{$ctrl.class_id}}-{{$index}}" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <ng-transclude></ng-transclude>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-1">
-            <button type="button" ng-click="$ctrl.addItem()" class="btn btn-success pull-right">
-              <i class="glyphicon glyphicon-plus"></i> New
-            </button>
-          </div>
-        </div>
-      </div>
-    `,
+      transclude(scope, clone => element.append(clone));
+    }
   }
 
   /**
@@ -117,12 +82,12 @@ export function listItemDirective() {
     this.$scope = $scope;
     this.validators = [];
 
-    this.addItem = () => {
+    this.addItem = (type) => {
       if (!this.isValid()) {
         return alert('Fill all required fields before insert new one');
       }
 
-      const newItem = { id: this.items.length + 1 };
+      const newItem = { id: this.items.length + 1, _type: type };
 
       this.items.push(newItem);
     }
