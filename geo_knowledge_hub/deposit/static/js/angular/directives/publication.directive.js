@@ -1,8 +1,6 @@
 class PublicationController {
   constructor($scope) {
     this.$scope = $scope;
-
-    console.log('Create scope Publication', $scope, this);
   }
 
   validate() {
@@ -43,12 +41,13 @@ export const publicationDirective = () => ({
   template: `
     <div class="row">
       <div class="col-md-12">
-        <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_doi">DOI</label>
-          <input type="text" step="any" placeholder="" class="form-control"
-                id="publications-{{ $ctrl.item.id }}-publication_doi"
-                ng-model="$ctrl.item.publication_doi" name="publications-{{ $ctrl.item.id }}-publication_doi">
+        <div class="form-group">
+          <file-uploader bucket=""></file-uploader>
         </div>
+      </div>
+
+      <div class="col-md-12">
+        <doi id="publications-{{ $ctrl.item.id }}-publication" model="$ctrl.item.publication_doi"></doi>
       </div>
 
       <div class="col-md-12">
