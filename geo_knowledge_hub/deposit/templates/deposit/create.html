@@ -1,19 +1,14 @@
 
 <style>
-.container {
-overflow: auto;
-}
-.form-group {
-position: relative;
-border: 1px solid black;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;
-  background-color: lightgrey;
-  overflow:auto;
-}
 </style>
 {%- extends config.BASE_TEMPLATE %}
+
+{%- block css %}
+  <!-- Inherit parent CSS -->
+  {{ super() }}
+
+  {{ webpack['css_deposit.css'] }}
+{%- endblock %}
 
 {%- block javascript %}
   <!-- Inherit parent js -->
@@ -37,74 +32,110 @@ border: 1px solid black;
 {% endmacro %}
 
 {% block page_body %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Create record</h2>
-      </div>
-      <div  id="form" style="height: auto;">
 
-        <form action="{{ url_for('deposit.create') }}" method="POST" data-bucket-id="" enctype="multipart/form-data">
+  <div class="container" ng-app="knowledge_hub.directives">
+    <div class="row">
+
+      <form action="{{ url_for('deposit.create') }}"
+            method="POST"
+            data-bucket-id=""
+            enctype="multipart/form-data"
+            list-item="{minItems: 1}">
+
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <ul class="nav">
+            <li><a href="#"
+                   ng-click="$ctrl.addItem('publication')"
+                   data-toggle="tooltip" title="Add a new publication"><i class="fa fa-book"></i> Publication</a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new DataSet"
+                   ng-click="$ctrl.addItem('dataset')"><i class="fa fa-object-group"></i> DataSet</a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new Tool"
+                   ng-click="$ctrl.addItem('tool')"><i class="fa fa-code-fork"></i> Tool </a>
+            </li>
+            <li>
+              <a href="#"
+                 data-toogle="tooltip" title="Add a new Output"
+                 ng-click="$ctrl.addItem('output')">
+                <i class="fa fa-briefcase" aria-hidden="true"></i> Output
+              </a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new Virtualenv"
+                   ng-click="$ctrl.addItem('virtualenv')"><i class="fa fa-desktop"></i> Virtualenv </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+          <h4 class=""><i class="icon-plus-sign-alt"></i> Create record</h4>
+
+          <hr />
+
+          <div class="form-group ">
+              <label for="title">Title</label>
+              <input class="form-control" id="title" name="title" required="" type="text" value="">
+          </div>
+
           <div class="form-group">
-            <div class="well">
-              <div class="row">
-                <div class="col-md-12">
-                  <label for="document">Choose files to document</label>
-                  <div class="input-group">
-                    <input class="form-control" id="document" name="document[]" multiple type="file">
-                  </div>
-                </div>
+            <label class="control-label " for="description">Description:</label>
+            <textarea placeholder="" class="form-control" id="description" ng-model="$ctrl.item.output_abstract" name="description"></textarea>
+          </div>
+
+          <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
+            <label for="resource_type">{{ form.resource_type.label }}</label>
+            {{ form.resource_type(class_="form-control")|safe }}
+            {{ errors(form.resource_type) }}
+          </div>
+
+          {% raw %}
+          <div ng-repeat="item in $ctrl.items track by $index">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <a data-toggle="collapse" href="#panel-record-{{ item.id }}" style="text-transform: capitalize;
+"> {{ item._type }} {{ item.id }} </a>
+                  <button style="position: relative; z-index: 20;" type="button"
+                          class="close pull-right"
+                          ng-click="$ctrl.removeItem($index)">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </h3>
+              </div>
+              <div class="panel-body" id="panel-record-{{ item.id }}">
+
+                <publication ng-if="item._type === 'publication'" item="item"></publication>
+                <dataset ng-if="item._type === 'dataset'" item="item"></dataset>
+                <tool ng-if="item._type === 'tool'" item="item"></tool>
+                <output ng-if="item._type === 'output'" item="item"></output>
+
               </div>
             </div>
           </div>
-
+          {% endraw %}
+          <!-- <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="document">Choose files to document</label>
+                <div class="input-group" style="width:100%">
+                  <input class="form-control" id="document" name="document[]" multiple type="file">
+                </div>
+              </div>
+            </div>
+          </div> -->
+          {{ form.csrf_token }}
           {{ form.bucket }}
 
-          <div id="title" class="form-group {{ 'has-error' if form.title.errors }}">
-            <label for="title">{{ form.title.label }}</label>
-            {{ form.title(class_="form-control")|safe }}
-            {{ errors(form.title) }}
-            </div>
-            <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
-              <label for="resource_type">{{ form.resource_type.label }}</label>
-              {{ form.resource_type(class_="form-control")|safe }}
-              {{ errors(form.resource_type) }}
-            </div>
-            <div id="docset" style="height: 250px;" class="form-group {{ 'has-error' if form.docset.errors }}">
-              <label for="docset">{{ form.docset.label }}</label>
-              {{ form.docset(class_="form-control")|safe }}
-              {{ errors(form.docset) }}
-            </div>
-            <div id="publications" style="height: 920px;" class="form-group {{ 'has-error' if form.publications.errors }}">
-              <label for="publications">{{ form.publications.label }}</label>
-              {{ form.publications(class_="form-control")|safe }}
-              {{ errors(form.publications) }}
-            </div>
-            <div id="datasets"  style="height: 560px;"class="form-group {{ 'has-error' if form.datasets.errors }}">
-              <label for="datasets">{{ form.datasets.label }}</label>
-              {{ form.datasets(class_="form-control")|safe }}
-              {{ errors(form.datasets) }}
-            </div>
-            <div id="tools" style="height: 240px;" class="form-group {{ 'has-error' if form.tools.errors }}">
-              <label for="tools" >{{ form.tools.label }} </label>
-              {{ form.tools(class_="form-control")|safe }}
-              {{ errors(form.tools) }}
-            </div>
-            <div id="outputs"  style="height: 240px;" class="form-group {{ 'has-error' if form.outputs.errors }}">
-              <label for="outputs">{{ form.outputs.label }}</label>
-              {{ form.outputs(class_="form-control")|safe }}
-              {{ errors(form.outputs) }}
-            </div>
-            <div id="virtenvs"style="height: 105px;" class="form-group {{ 'has-error' if form.virtenvs.errors }}">
-              <label for="virtenvs">{{ form.virtenvs.label }}</label>
-              {{ form.virtenvs(class_="form-control")|safe }}
-              {{ errors(form.virtenvs) }}
-            </div>
-            {{ form.csrf_token }}
-            {{ errors(form.csrf_token) }}
-            <button type="submit" class="btn btn-default">Create</button>
-        </form>
-      </div>
+          <button type="submit" class="btn btn-default">Create</button>
+        </div>
+
+      </form>
     </div>
   </div>
+
 {% endblock page_body %}

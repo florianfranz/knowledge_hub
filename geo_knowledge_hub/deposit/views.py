@@ -32,8 +32,6 @@ def create():
     form = RecordForm()
     # if the form is submitted and valid
     if form.validate_on_submit():
-        # set the owner as the current logged in user
-        owner = int(current_user.get_id())
         # create the record
         create_record(
           dict(
