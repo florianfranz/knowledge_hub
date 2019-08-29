@@ -2,5 +2,13 @@
 
 {%- block navbar_nav %}
    {{ super() }}
-   <a class="btn btn-success" href="/deposit/create">Upload</a>
+  <div class="navbar-left">
+    <ul class="nav navbar-nav" style="padding: 13px;">
+      <li class="active">
+        <a href="{{ url_for('deposit.create') }}" style="color: white; background-color: none" class="btn navbar-btn">
+          Upload <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 {%- endblock navbar_nav %}
