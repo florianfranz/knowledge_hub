@@ -35,6 +35,7 @@ export const dataSetDirective = () => ({
   require: ['^^listItem', 'dataset'],
   controller: DataSetController,
   scope: {
+    id: '<',
     item: '='
   },
   controllerAs: '$ctrl',
@@ -50,15 +51,15 @@ export const dataSetDirective = () => ({
         </div>
 
         <div class="col-md-12">
-          <doi id="datasets-{{ $ctrl.item.id }}-dataset" model="$ctrl.item.dataset_doi"></doi>
+          <doi id="datasets-{{ $ctrl.id }}-dataset" model="$ctrl.item.dataset_doi"></doi>
         </div>
 
         <div class="col-md-6">
           <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_creator">Creator</label>
+            <label class="control-label " for="datasets-{{ $ctrl.id }}-dataset_creator">Creator</label>
             <input type="text" step="any" placeholder="" class="form-control"
-                   id="datasets-{{ $ctrl.item.id }}-dataset_creator"
-                   ng-model="$ctrl.item.dataset_creator" name="datasets-{{ $ctrl.item.id }}-dataset_creator">
+                   id="datasets-{{ $ctrl.id }}-dataset_creator"
+                   ng-model="$ctrl.item.dataset_creator" name="datasets-{{ $ctrl.id }}-dataset_creator">
               <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
                     aria-hidden="true"></span>
           </div>
@@ -66,10 +67,10 @@ export const dataSetDirective = () => ({
 
         <div class="col-md-6">
           <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_type">Type</label>
+            <label class="control-label " for="datasets-{{ $ctrl.id }}-dataset_type">Type</label>
             <input type="text" step="any" placeholder="" class="form-control"
-                   id="datasets-{{ $ctrl.item.id }}-dataset_type"
-                   ng-model="$ctrl.item.dataset_type" name="datasets-{{ $ctrl.item.id }}-dataset_type">
+                   id="datasets-{{ $ctrl.id }}-dataset_type"
+                   ng-model="$ctrl.item.dataset_type" name="datasets-{{ $ctrl.id }}-dataset_type">
               <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
                     aria-hidden="true"></span>
           </div>
@@ -77,10 +78,10 @@ export const dataSetDirective = () => ({
 
         <div class="col-md-6">
           <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_link">Link</label>
+            <label class="control-label " for="datasets-{{ $ctrl.id }}-dataset_link">Link</label>
             <input type="text" step="any" placeholder="" class="form-control"
-                  id="datasets-{{ $ctrl.item.id }}-dataset_link"
-                  ng-model="$ctrl.item.dataset_link" name="datasets-{{ $ctrl.item.id }}-dataset_link">
+                  id="datasets-{{ $ctrl.id }}-dataset_link"
+                  ng-model="$ctrl.item.dataset_link" name="datasets-{{ $ctrl.id }}-dataset_link">
               <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
                     aria-hidden="true"></span>
           </div> <!-- end col-md-6 -->
@@ -88,10 +89,10 @@ export const dataSetDirective = () => ({
 
         <div class="col-md-12">
           <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_title">Title</label>
+            <label class="control-label " for="datasets-{{ $ctrl.id }}-dataset_title">Title</label>
             <input type="text" step="any" placeholder="" class="form-control"
-                  id="datasets-{{ $ctrl.item.id }}-dataset_title"
-                  ng-model="$ctrl.item.dataset_title" name="datasets-{{ $ctrl.item.id }}-dataset_title">
+                  id="datasets-{{ $ctrl.id }}-dataset_title"
+                  ng-model="$ctrl.item.dataset_title" name="datasets-{{ $ctrl.id }}-dataset_title">
               <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
                     aria-hidden="true"></span>
           </div>
@@ -99,10 +100,10 @@ export const dataSetDirective = () => ({
 
         <div class="col-md-12">
           <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_abstract">Abstract</label>
+            <label class="control-label " for="datasets-{{ $ctrl.id }}-dataset_abstract">Abstract</label>
             <textarea placeholder="" class="form-control"
-                      id="datasets-{{ $ctrl.item.id }}-dataset_abstract"
-                      ng-model="$ctrl.item.dataset_abstract" name="datasets-{{ $ctrl.item.id }}-dataset_abstract">
+                      id="datasets-{{ $ctrl.id }}-dataset_abstract"
+                      ng-model="$ctrl.item.dataset_abstract" name="datasets-{{ $ctrl.id }}-dataset_abstract">
             </textarea>
           </div>
         </div>

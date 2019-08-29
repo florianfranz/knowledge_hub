@@ -42,28 +42,27 @@
         <!-- sidebar -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
           <ul class="nav">
-            <li><a href="#"
-                   ng-click="$ctrl.addItem('publication')"
-                   data-toggle="tooltip" title="Add a new publication"><i class="fa fa-book"></i> Publication</a>
-            </li>
-            <li><a href="#"
-                   data-toggle="tooltip" title="Add a new DataSet"
-                   ng-click="$ctrl.addItem('dataset')"><i class="fa fa-object-group"></i> DataSet</a>
-            </li>
-            <li><a href="#"
-                   data-toggle="tooltip" title="Add a new Tool"
-                   ng-click="$ctrl.addItem('tool')"><i class="fa fa-code-fork"></i> Tool </a>
+            <li>
+              <a href="#" ng-click="$ctrl.addItem({ _type: 'publication' })"
+                 data-toggle="tooltip" title="Add a new publication"><i class="fa fa-book"></i> Publication</a>
             </li>
             <li>
-              <a href="#"
-                 data-toogle="tooltip" title="Add a new Output"
-                 ng-click="$ctrl.addItem('output')">
+              <a href="#" data-toggle="tooltip" title="Add a new DataSet"
+                 ng-click="$ctrl.addItem({ _type: 'dataset' })"><i class="fa fa-object-group"></i> DataSet</a>
+            </li>
+            <li>
+              <a href="#" data-toggle="tooltip" title="Add a new Tool"
+                 ng-click="$ctrl.addItem({ _type: 'tool' })"><i class="fa fa-code-fork"></i> Tool </a>
+            </li>
+            <li>
+              <a href="#" data-toogle="tooltip" title="Add a new Output"
+                 ng-click="$ctrl.addItem({ _type: 'output' })">
                 <i class="fa fa-briefcase" aria-hidden="true"></i> Output
               </a>
             </li>
-            <li><a href="#"
-                   data-toggle="tooltip" title="Add a new Virtualenv"
-                   ng-click="$ctrl.addItem('virtualenv')"><i class="fa fa-desktop"></i> Virtualenv </a>
+            <li>
+              <a href="#" data-toggle="tooltip" title="Add a new Virtualenv"
+                 ng-click="$ctrl.addItem({ _type: 'virtualenv' })"><i class="fa fa-desktop"></i> Virtualenv </a>
             </li>
           </ul>
         </div>
@@ -106,10 +105,10 @@
               </div>
               <div class="panel-body collapse in" id="panel-record-{{ item.id }}" aria-expanded="true">
 
-                <publication ng-if="item._type === 'publication'" item="item"></publication>
-                <dataset ng-if="item._type === 'dataset'" item="item"></dataset>
-                <tool ng-if="item._type === 'tool'" item="item"></tool>
-                <output ng-if="item._type === 'output'" item="item"></output>
+                <publication id="$index + 1" ng-if="item._type === 'publication'" item="item"></publication>
+                <dataset id="$index + 1" ng-if="item._type === 'dataset'" item="item"></dataset>
+                <tool id="$index + 1" ng-if="item._type === 'tool'" item="item"></tool>
+                <output id="$index + 1" ng-if="item._type === 'output'" item="item"></output>
 
               </div>
             </div>
