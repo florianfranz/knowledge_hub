@@ -3,6 +3,7 @@ class DOIController {
     this.DOIService = DOIService;
 
     this.disabled = false;
+
     this.id = this.id || 'default';
   }
 

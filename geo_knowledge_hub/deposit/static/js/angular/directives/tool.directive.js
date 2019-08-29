@@ -39,6 +39,12 @@ export const toolDirective = () => ({
   template: `
     <div class="row">
       <div class="col-md-12">
+        <div class="form-group">
+          <file-uploader bucket=""></file-uploader>
+        </div>
+      </div>
+
+      <div class="col-md-12">
         <doi id="tools-{{ $ctrl.item.id }}-tool" model="$ctrl.item.tool_doi"></doi>
       </div>
 
@@ -76,7 +82,7 @@ export const toolDirective = () => ({
           <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_link">Link to the Tool</label>
           <input type="text" step="any" placeholder="" class="form-control"
                 id="tools-{{ $ctrl.item.id }}-tool_link"
-                ng-model="$ctrl.item.tool_title" name="tools-{{ $ctrl.item.id }}-tool_link">
+                ng-model="$ctrl.item.tool_link" name="tools-{{ $ctrl.item.id }}-tool_link">
         </div>
       </div>
     </div>

@@ -10,8 +10,6 @@ import { toolDirective } from './directives/tool.directive';
 // Components
 import { doiComponent } from './components/doi.component';
 import { fileUploadComponent } from './components/file-upload.component';
-// Services
-import DOIService from './services/doi.service';
 
 
 // Register Angular Application
@@ -23,5 +21,4 @@ angular
   .directive('output', outputDirective)
   .directive('publication', publicationDirective)
   .directive('dataset', dataSetDirective)
-  .directive('tool', toolDirective)
-  .service('DOIService', DOIService);
+  .directive('tool', toolDirective);

@@ -1,6 +1,3 @@
-
-<style>
-</style>
 {%- extends config.BASE_TEMPLATE %}
 
 {%- block css %}
@@ -72,7 +69,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-9">
-          <h4 class=""><i class="icon-plus-sign-alt"></i> Create record</h4>
+          <h4 class=""><i class="icon-plus-sign-alt"></i>Knowledge Package</h4>
 
           <hr />
 
@@ -92,17 +89,13 @@
             {{ errors(form.resource_type) }}
           </div>
 
-          <div class="form-group">
-            <file-uploader bucket=""></file-uploader>
-          </div>
-
           {% raw %}
           <div ng-repeat="item in $ctrl.items track by $index">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">
                   <a data-toggle="collapse" href="#panel-record-{{ item.id }}" style="text-transform: capitalize;
-"> {{ item._type }} {{ item.id }} </a>
+"> <span ng-bind="item._type + ' ' + item.id"></span> </a>
                   <button style="position: relative; z-index: 20;" type="button"
                           class="close pull-right"
                           ng-click="$ctrl.removeItem($index)">
@@ -111,7 +104,7 @@
                   </button>
                 </h3>
               </div>
-              <div class="panel-body" id="panel-record-{{ item.id }}">
+              <div class="panel-body collapse in" id="panel-record-{{ item.id }}" aria-expanded="true">
 
                 <publication ng-if="item._type === 'publication'" item="item"></publication>
                 <dataset ng-if="item._type === 'dataset'" item="item"></dataset>
@@ -122,20 +115,11 @@
             </div>
           </div>
           {% endraw %}
-          <!-- <div class="form-group">
-            <div class="row">
-              <div class="col-md-12">
-                <label for="document">Choose files to document</label>
-                <div class="input-group" style="width:100%">
-                  <input class="form-control" id="document" name="document[]" multiple type="file">
-                </div>
-              </div>
-            </div>
-          </div> -->
+
           {{ form.csrf_token }}
           {{ form.bucket }}
 
-          <button type="submit" class="btn btn-default">Create</button>
+          <button type="submit" class="btn btn-primary pull-right">Save</button>
         </div>
 
       </form>

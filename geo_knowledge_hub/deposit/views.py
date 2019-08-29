@@ -58,24 +58,6 @@ def success():
     return render_template('deposit/success.html')
 
 
-def upload_file(bucket, stream, filename):
-    """
-    Helper to upload files to the database storage
-
-    Args:
-        bucket (str): Bucket Identifier
-        stream (io.BytesIO): Binary stream with file data
-        filename (str): File name
-    """
-    with db.session.begin_nested():
-        bucket = db.session.query(Bucket).filter(Bucket.id == bucket).first()
-
-        assert bucket is not None
-
-        ObjectVersion.create(bucket, filename, stream=stream)
-    db.session.commit()
-
-
 @blueprint.route('/create-bucket',
                  defaults={'bucket_id': None}, methods=['POST'])
 @blueprint.route('/create-bucket/<bucket_id>', methods=['POST'])
@@ -118,7 +100,13 @@ def create_file_in_bucket(bucket_id):
     files_key = next(request.files.keys())
 
     for file_storage in request.files.getlist(files_key):
-        upload_file(bucket_id, request.stream, file_storage.filename)
+        with db.session.begin_nested():
+            bucket = db.session.query(Bucket).filter(Bucket.id == bucket_id).first()
+
+            assert bucket is not None
+
+            ObjectVersion.create(bucket, file_storage.filename, stream=file_storage.stream)
+    db.session.commit()
 
     return jsonify({})
 

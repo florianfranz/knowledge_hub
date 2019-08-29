@@ -44,6 +44,12 @@ export const dataSetDirective = () => ({
     <div>
       <div class="row">
         <div class="col-md-12">
+          <div class="form-group">
+            <file-uploader bucket=""></file-uploader>
+          </div>
+        </div>
+
+        <div class="col-md-12">
           <doi id="datasets-{{ $ctrl.item.id }}-dataset" model="$ctrl.item.dataset_doi"></doi>
         </div>
 

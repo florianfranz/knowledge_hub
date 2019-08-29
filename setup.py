@@ -56,7 +56,7 @@ setup(
         'invenio_assets.webpack': [
             'geo_knowledge_hub_theme = geo_knowledge_hub.theme.webpack:theme',
             'geo_knowledge_hub_deposit_js = geo_knowledge_hub.deposit.webpack:js_deposit',
-            'geo_knowledge_hub_deposit_css = geo_knowledge_hub.deposit.webpack:css_deposit',
+            'geo_knowledge_hub_deposit_css = geo_knowledge_hub.deposit.webpack:css_deposit'
         ],
         'invenio_config.module': [
             'geo_knowledge_hub = geo_knowledge_hub.config',
