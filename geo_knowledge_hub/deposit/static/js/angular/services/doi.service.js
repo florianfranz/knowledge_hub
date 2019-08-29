@@ -1,6 +1,7 @@
+// TODO
 export default class DOIService {
   reserve() {
-    return `reserved-${Date.now()}`
+    return null;
   }
 
   search(doi) {

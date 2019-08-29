@@ -83,9 +83,9 @@ export function listItemDirective() {
     this.validators = [];
 
     this.addItem = (type) => {
-      if (!this.isValid()) {
-        return alert('Fill all required fields before insert new one');
-      }
+//      if (!this.isValid()) {
+//        return alert('Fill all required fields before insert new one');
+//      }
 
       const newItem = { id: this.items.length + 1, _type: type };
 
