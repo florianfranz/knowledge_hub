@@ -32,8 +32,6 @@ def create():
     form = RecordForm()
     # if the form is submitted and valid
     if form.validate_on_submit():
-        # set the owner as the current logged in user
-        owner = int(current_user.get_id())
         # create the record
         create_record(
           dict(
@@ -71,7 +69,10 @@ def create_bucket(bucket_id=None):
             loc = Location(name='local', uri=GEO_KNOWLEDGE_HUB_DEFAULT_BUCKET_URL, default=True)
             db.session.add(loc)
 
-        bucket = db.session.query(Bucket).filter(Bucket.id == bucket_id).first()
+        bucket = None
+
+        if bucket_id:
+            bucket = db.session.query(Bucket).filter(Bucket.id == bucket_id).first()
 
         if not bucket:
             bucket = Bucket.create(
