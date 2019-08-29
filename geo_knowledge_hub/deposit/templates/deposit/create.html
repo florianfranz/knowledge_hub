@@ -1,8 +1,11 @@
-
-<style>
-
-</style>
 {%- extends config.BASE_TEMPLATE %}
+
+{%- block css %}
+  <!-- Inherit parent CSS -->
+  {{ super() }}
+
+  {{ webpack['css_deposit.css'] }}
+{%- endblock %}
 
 {%- block javascript %}
   <!-- Inherit parent js -->
@@ -26,73 +29,101 @@
 {% endmacro %}
 
 {% block page_body %}
+
   <div class="container" ng-app="knowledge_hub.directives">
     <div class="row">
-      <h4 class=""><i class="icon-plus-sign-alt"></i> Create record</h4>
 
-      <hr />
+      <form action="{{ url_for('deposit.create') }}"
+            method="POST"
+            data-bucket-id=""
+            enctype="multipart/form-data"
+            list-item="{minItems: 1}">
 
-      <div id="form" style="height: auto;">
-        <form action="{{ url_for('deposit.create') }}" method="POST" data-bucket-id="" enctype="multipart/form-data">
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <ul class="nav">
+            <li><a href="#"
+                   ng-click="$ctrl.addItem('publication')"
+                   data-toggle="tooltip" title="Add a new publication"><i class="fa fa-book"></i> Publication</a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new DataSet"
+                   ng-click="$ctrl.addItem('dataset')"><i class="fa fa-object-group"></i> DataSet</a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new Tool"
+                   ng-click="$ctrl.addItem('tool')"><i class="fa fa-code-fork"></i> Tool </a>
+            </li>
+            <li>
+              <a href="#"
+                 data-toogle="tooltip" title="Add a new Output"
+                 ng-click="$ctrl.addItem('output')">
+                <i class="fa fa-briefcase" aria-hidden="true"></i> Output
+              </a>
+            </li>
+            <li><a href="#"
+                   data-toggle="tooltip" title="Add a new Virtualenv"
+                   ng-click="$ctrl.addItem('virtualenv')"><i class="fa fa-desktop"></i> Virtualenv </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+          <h4 class=""><i class="icon-plus-sign-alt"></i>Knowledge Package</h4>
+
+          <hr />
+
+          <div class="form-group ">
+              <label for="title">Title</label>
+              <input class="form-control" id="title" name="title" required="" type="text" value="">
+          </div>
+
           <div class="form-group">
-            <div class="row">
-              <div class="col-md-12">
-                <label for="document">Choose files to document</label>
-                <div class="input-group" style="width:100%">
-                  <input class="form-control" id="document" name="document[]" multiple type="file">
-                </div>
-              </div>
-            </div>
+            <label class="control-label " for="description">Description:</label>
+            <textarea placeholder="" class="form-control" id="description" ng-model="$ctrl.item.output_abstract" name="description"></textarea>
           </div>
 
-          {{ form.bucket }}
-
-          <div id="title" class="form-group {{ 'has-error' if form.title.errors }}">
-            <label for="title">{{ form.title.label }}</label>
-            {{ form.title(class_="form-control")|safe }}
-            {{ errors(form.title) }}
-          </div>
           <div id="resource_type" class="form-group {{ 'has-error' if form.resource_type.errors }}">
             <label for="resource_type">{{ form.resource_type.label }}</label>
             {{ form.resource_type(class_="form-control")|safe }}
             {{ errors(form.resource_type) }}
           </div>
 
-          <hr/>
+          {% raw %}
+          <div ng-repeat="item in $ctrl.items track by $index">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <a data-toggle="collapse" href="#panel-record-{{ item.id }}" style="text-transform: capitalize;
+"> <span ng-bind="item._type + ' ' + item.id"></span> </a>
+                  <button style="position: relative; z-index: 20;" type="button"
+                          class="close pull-right"
+                          ng-click="$ctrl.removeItem($index)">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </h3>
+              </div>
+              <div class="panel-body collapse in" id="panel-record-{{ item.id }}" aria-expanded="true">
 
-          <div id="docset" class="form-group {{ 'has-error' if form.docset.errors }}">
-            <h4 class=""><i class="icon-plus-sign-alt"></i> {{ form.docset.label }}</h4>
+                <publication ng-if="item._type === 'publication'" item="item"></publication>
+                <dataset ng-if="item._type === 'dataset'" item="item"></dataset>
+                <tool ng-if="item._type === 'tool'" item="item"></tool>
+                <output ng-if="item._type === 'output'" item="item"></output>
 
-            {{ form.docset(class_="table table-hover", style="font-size: 14px")|safe }}
-            {{ errors(form.docset) }}
+              </div>
+            </div>
           </div>
+          {% endraw %}
 
-          <list-item title="Publications" id="publication" min-items="1">
-            <publication item="$parent.item"></publication>
-          </list-item>
-
-          <list-item title="Datasets" id="dataset" min-items="1">
-            <dataset item="$parent.item"></dataset>
-          </list-item>
-
-          <list-item title="Tools" id="tools" min-items="1">
-            <tool item="$parent.item"></tool>
-          </list-item>
-
-          <list-item title="Outputs" id="outputs" min-items="1">
-            <output item="$parent.item"></output>
-          </list-item>
-
-          <div id="virtenvs"style="height: 105px;" class="form-group {{ 'has-error' if form.virtenvs.errors }}">
-            <label for="virtenvs">{{ form.virtenvs.label }}</label>
-            {{ form.virtenvs(class_="list-group")|safe }}
-            {{ errors(form.virtenvs) }}
-          </div>
           {{ form.csrf_token }}
-          {{ errors(form.csrf_token) }}
-          <button type="submit" class="btn btn-default">Create</button>
-        </form>
-      </div>
+          {{ form.bucket }}
+
+          <button type="submit" class="btn btn-primary pull-right">Save</button>
+        </div>
+
+      </form>
     </div>
   </div>
+
 {% endblock page_body %}

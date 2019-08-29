@@ -10,13 +10,21 @@ js_deposit = bundle1 = WebpackBundle(
     __name__,
     './static/',
     entry={
-        'js_deposit': ['./js/utils.js', './js/main.js']
+        'js_deposit': './js/angular/app.js'
     },
     dependencies={
-        # File input module
-        'bootstrap-fileinput': 'git://github.com/kartik-v/bootstrap-fileinput#94474f4a0f84fa35a08eb8724f8b8391c9806eb9',
+        'angular': '^1.7.7',
+        'angular-file-upload': '^2.5.0',
         # External Invenio Files JS
         'invenio-files-js': 'git://github.com/inveniosoftware/invenio-files-js#74fbef25f2db2f39995091ed2ccb629f5ced5ac3'
     }
 )
 
+css_deposit = WebpackBundle(
+    __name__,
+    './static/',
+    entry={
+        'css_deposit': './css/main.css'
+    },
+    dependencies={}
+)

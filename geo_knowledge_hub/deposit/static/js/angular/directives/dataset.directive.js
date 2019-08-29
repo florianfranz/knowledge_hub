@@ -43,16 +43,15 @@ export const dataSetDirective = () => ({
   template: `
     <div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="form-group schema-form-text has-feedback">
-            <label class="control-label " for="datasets-{{ $ctrl.item.id }}-dataset_doi">DOI</label>
-            <input type="text" step="any" placeholder="" class="form-control"
-                   id="datasets-{{ $ctrl.item.id }}-dataset_doi"
-                   ng-model="$ctrl.item.dataset_doi" name="datasets-{{ $ctrl.item.id }}-dataset_doi">
-              <span ng-if="form.feedback !== false" class="form-control-feedback glyphicon"
-                    aria-hidden="true"></span>
+        <div class="col-md-12">
+          <div class="form-group">
+            <file-uploader bucket=""></file-uploader>
           </div>
-        </div> <!-- end col-md-6 -->
+        </div>
+
+        <div class="col-md-12">
+          <doi id="datasets-{{ $ctrl.item.id }}-dataset" model="$ctrl.item.dataset_doi"></doi>
+        </div>
 
         <div class="col-md-6">
           <div class="form-group schema-form-text has-feedback">
