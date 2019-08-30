@@ -49,7 +49,7 @@ export const authorComponent = {
         <div class="input-group">
           <label for="{{ $ctrl.id }}">Authors: </label>
 
-          <input type="text" id="{{ $ctrl.id }}" ng-keydown="$event.keyCode === 32 && $ctrl.addAuthor()"
+          <input type="text" id="{{ $ctrl.id }}"
                  class="form-control" placeholder="Author" ng-model="$ctrl.author">
 
           <span class="help-block" ng-if="!!$ctrl.error" ng-bind="$ctrl.error"></span>
