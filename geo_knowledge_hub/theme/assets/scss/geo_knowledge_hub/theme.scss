@@ -13,3 +13,42 @@
 .navbar-brand {
     min-height: 96px;
 }
+
+.link-block {
+    .panel:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+}
+
+.link-block:link {
+    text-decoration: none;
+}
+
+.link-block:visited {
+    text-decoration: none;
+}
+
+.link-block:hover{
+    text-decoration: none;
+}
+
+.record-result {
+    height: 133px;
+}
+
+.record-result-image {
+    height: 100px;
+    width: 100px;
+    background: #3e587b;
+    display: inline-block;
+}
+
+.filter-panel {
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+
+    .panel-body {
+        min-height: 285px;
+    }
+}
