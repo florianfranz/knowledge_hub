@@ -30,10 +30,10 @@
 }
 
 .author-list {
-    padding-top: 15px;
-    padding-left: 15px;
-    max-height: 211px;
+    max-height: 206px;
     overflow-y: auto;
+    margin: 15px 0px 10px;
+    padding: 10px 15px;
 }
 
 /* collapsed sidebar styles */
