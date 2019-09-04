@@ -82,14 +82,11 @@ export function listItemDirective() {
     this.$scope = $scope;
     this.validators = [];
 
-    this.addItem = (type) => {
+    this.addItem = (item) => {
 //      if (!this.isValid()) {
 //        return alert('Fill all required fields before insert new one');
 //      }
-
-      const newItem = { id: this.items.length + 1, _type: type };
-
-      this.items.push(newItem);
+      this.items.push(item);
     }
 
     this.removeItem = (index) => {

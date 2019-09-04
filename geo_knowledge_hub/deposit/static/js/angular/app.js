@@ -8,6 +8,7 @@ import { outputDirective } from './directives/output.directive';
 import { publicationDirective } from './directives/publication.directive';
 import { toolDirective } from './directives/tool.directive';
 // Components
+import { authorComponent } from './components/author.component';
 import { doiComponent } from './components/doi.component';
 import { fileUploadComponent } from './components/file-upload.component';
 // Services
@@ -17,6 +18,7 @@ import DOIService from './services/doi.service';
 // Register Angular Application
 angular
   .module('knowledge_hub.directives', ['angularFileUpload'])
+  .component('author', authorComponent)
   .component('doi', doiComponent)
   .component('fileUploader', fileUploadComponent)
   .directive('listItem', listItemDirective)

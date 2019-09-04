@@ -31,6 +31,7 @@ export const toolDirective = () => ({
   require: ['^^listItem', 'tool'],
   controller: ToolsController,
   scope: {
+    id: '<',
     item: '=',
   },
   controllerAs: '$ctrl',
@@ -45,44 +46,44 @@ export const toolDirective = () => ({
       </div>
 
       <div class="col-md-12">
-        <doi id="tools-{{ $ctrl.item.id }}-tool" model="$ctrl.item.tool_doi"></doi>
+        <doi id="tools-{{ $ctrl.id }}-tool" model="$ctrl.item.tool_doi"></doi>
       </div>
 
       <div class="col-md-6">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_type">Type of the Tool</label>
+          <label class="control-label " for="tools-{{ $ctrl.id }}-tool_type">Type of the Tool</label>
           <input type="text" step="any" placeholder="" class="form-control"
-                id="tools-{{ $ctrl.item.id }}-tool_type"
-                ng-model="$ctrl.item.tool_type" name="tools-{{ $ctrl.item.id }}-tool_type">
+                id="tools-{{ $ctrl.id }}-tool_type"
+                ng-model="$ctrl.item.tool_type" name="tools-{{ $ctrl.id }}-tool_type">
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_title">Title of the Tool</label>
+          <label class="control-label " for="tools-{{ $ctrl.id }}-tool_title">Title of the Tool</label>
           <input type="text" step="any" placeholder="" class="form-control"
-                id="tools-{{ $ctrl.item.id }}-tool_title"
-                ng-model="$ctrl.item.tool_title" name="tools-{{ $ctrl.item.id }}-tool_title">
+                id="tools-{{ $ctrl.id }}-tool_title"
+                ng-model="$ctrl.item.tool_title" name="tools-{{ $ctrl.id }}-tool_title">
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_abstract">Abstract of the Tool	</label>
+          <label class="control-label " for="tools-{{ $ctrl.id }}-tool_abstract">Abstract of the Tool	</label>
           <textarea placeholder="" class="form-control"
-                    id="tools-{{ $ctrl.item.id }}-tool_abstract"
+                    id="tools-{{ $ctrl.id }}-tool_abstract"
                     ng-model="$ctrl.item.tool_abstract"
-                    name="tools-{{ $ctrl.item.id }}-tool_abstract">
+                    name="tools-{{ $ctrl.id }}-tool_abstract">
           </textarea>
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="tools-{{ $ctrl.item.id }}-tool_link">Link to the Tool</label>
+          <label class="control-label " for="tools-{{ $ctrl.id }}-tool_link">Link to the Tool</label>
           <input type="text" step="any" placeholder="" class="form-control"
-                id="tools-{{ $ctrl.item.id }}-tool_link"
-                ng-model="$ctrl.item.tool_link" name="tools-{{ $ctrl.item.id }}-tool_link">
+                id="tools-{{ $ctrl.id }}-tool_link"
+                ng-model="$ctrl.item.tool_link" name="tools-{{ $ctrl.id }}-tool_link">
         </div>
       </div>
     </div>

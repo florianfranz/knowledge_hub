@@ -29,6 +29,13 @@
     border-bottom-width:1px;
 }
 
+.author-list {
+    max-height: 206px;
+    overflow-y: auto;
+    margin: 15px 0px 10px;
+    padding: 10px 15px;
+}
+
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
     .row-offcanvas {
@@ -61,4 +68,3 @@
         padding-top:0;
     }
 }
-

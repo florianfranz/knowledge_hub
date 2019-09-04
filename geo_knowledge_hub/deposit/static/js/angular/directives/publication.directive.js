@@ -33,6 +33,7 @@ export const publicationDirective = () => ({
   require: ['^^listItem', 'publication'],
   controller: PublicationController,
   scope: {
+    id: '<',
     item: '=',
   },
   controllerAs: '$ctrl',
@@ -47,34 +48,29 @@ export const publicationDirective = () => ({
       </div>
 
       <div class="col-md-12">
-        <doi id="publications-{{ $ctrl.item.id }}-publication" model="$ctrl.item.publication_doi"></doi>
+        <doi id="publications-{{ $ctrl.id }}-publication" model="$ctrl.item.publication_doi"></doi>
       </div>
 
       <div class="col-md-12">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_title">Title</label>
+          <label class="control-label " for="publications-{{ $ctrl.id }}-publication_title">Title</label>
           <input type="text" step="any" placeholder="" class="form-control"
-                id="publications-{{ $ctrl.item.id }}-publication_title"
-                ng-model="$ctrl.item.publication_title" name="publications-{{ $ctrl.item.id }}-publication_title">
+                id="publications-{{ $ctrl.id }}-publication_title"
+                ng-model="$ctrl.item.publication_title" name="publications-{{ $ctrl.id }}-publication_title">
         </div>
       </div>
 
       <div class="col-md-12">
-        <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_authors">Authors</label>
-          <input type="text" step="any" placeholder="" class="form-control"
-                id="publications-{{ $ctrl.item.id }}-publication_authors"
-                ng-model="$ctrl.item.publication_authors" name="publications-{{ $ctrl.item.id }}-publication_authors">
-        </div>
+        <author id="publications-{{ $ctrl.id }}-publication_authors" model="$ctrl.item.publication_authors"></author>
       </div>
 
       <div class="col-md-12">
         <div class="form-group schema-form-text has-feedback">
-          <label class="control-label " for="publications-{{ $ctrl.item.id }}-publication_abstract">Abstract</label>
+          <label class="control-label " for="publications-{{ $ctrl.id }}-publication_abstract">Abstract</label>
           <textarea placeholder="" class="form-control"
-                    id="publications-{{ $ctrl.item.id }}-publication_abstract"
+                    id="publications-{{ $ctrl.id }}-publication_abstract"
                     ng-model="$ctrl.item.publication_abstract"
-                    name="publications-{{ $ctrl.item.id }}-publication_abstract">
+                    name="publications-{{ $ctrl.id }}-publication_abstract">
           </textarea>
         </div>
       </div>

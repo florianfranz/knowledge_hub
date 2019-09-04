@@ -6,13 +6,28 @@
 
 -->
 
-<div ng-repeat="record in vm.invenioSearchResults.hits.hits track by $index">
-  <h4><a target="_self" ng-href="/records/{{ record.id }}">{{ record.metadata.title }}</a></h4>
-  <ul class="list-inline">
-      <li ng-repeat='contributor in record.metadata.contributors'>
-        {{ contributor.name }};
-      </li>
-  </ul>
-  <hr />
-</div>
 
+<a target="_self"
+   class="link-block"
+   ng-repeat="record in vm.invenioSearchResults.hits.hits track by $index"
+   ng-href="/records/{{ record.id }}">
+  <div class="panel panel-default record-result">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-2">
+          <img alt="120%x12-0" class="record-result-image" src="https://127.0.0.1:5000/static/images/geo_knowledge_hub_logo.svg">
+        </div>
+
+        <div class="col-md-10">
+          <h4 ng-bind="record.metadata.title"></h4>
+
+          <ul class="list-inline" ng-if="record.metadata.publications.length > 0">
+            <li ng-repeat='contributor in record.metadata.publications[0].publication_authors'>
+              {{ contributor }};
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
