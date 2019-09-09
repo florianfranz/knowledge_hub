@@ -59,6 +59,8 @@ FOOTER_TEMPLATE = 'invenio_theme/footer.html'
 HEADER_TEMPLATE = 'invenio_theme/header.html'
 #: Settings base template.
 SETTINGS_TEMPLATE = 'invenio_theme/page_settings.html'
+#: Search Page Layout Customization
+SEARCH_UI_SEARCH_TEMPLATE = 'geo_knowledge_hub/search.html'
 
 # Theme configuration
 # ===================
